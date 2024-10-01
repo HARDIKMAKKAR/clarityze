@@ -1,1 +1,34 @@
-<p>header works!</p>
+<div class="head" style="background-color: bisque;"> 
+  <!-- <div class= [ngClass]="{'opaque-header': isOpaque, 'transparent-header': !isOpaque}"> -->
+  <div style="margin-top: 0%; margin-bottom: 0%;" class="containerr">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid" [ngClass]="{'opaque-header': !isOpaque, 'transparent-header': isOpaque}">
+          <!-- <div class="container-fluid"> -->
+          <!-- <div class="name company-name"> -->
+            <a style="width: 20%; text-align: right; color: #ffffff; " class="navbar-brand" href="#">CLARITYZE</a>
+          <!-- </div> -->
+          <!-- <a style="width: 50%; text-align: center;" class="navbar-brand" href="#">NAME</a> -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav" >
+            <ul class="navbar-nav" >
+              <li class="nav-item"  >
+                <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}" class="nav-link" aria-current="page" href="#" style="color: #ffffff;">Home</a>
+              </li>
+              <li class="nav-item">
+                <a routerLink="/about" routerLinkActive="active" class="nav-link" href="#" style="color: #ffffff;">About</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a routerLink="/eye-test" routerLinkActive="active" class="nav-link" href="#">Eye Test</a>
+              </li> -->
+              <li class="nav-item">
+                <a routerLink="/features" routerLinkActive="active" class="nav-link" href="#" style="color: #ffffff;">Features</a>
+              </li>
+              <button (click)="onLogin()"  routerLinkActive="active" routerLink="/login" type="button" class="btn btn-primary">Login</button>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+   </div> 

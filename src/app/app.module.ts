@@ -9,6 +9,11 @@ import { FeaturesComponent } from './features/features.component';
 import { AboutComponent } from './about/about.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { DoctorLandingPageComponent } from './doctor-landing-page/doctor-landing-page.component';
+import { PatientLandingPageComponent } from './patient-landing-page/patient-landing-page.component';
+// import { AdminLandingPageComponent } from './admin-landing-page/admin-landing-page.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HeaderComponent,
     FeaturesComponent,
     AboutComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent,
+    SignupComponent,
+    DoctorLandingPageComponent,
+    PatientLandingPageComponent,
+    // AdminLandingPageComponent
   ],
   imports: [
     BrowserModule,

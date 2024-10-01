@@ -1,0 +1,236 @@
+<html lang="en">
+<body>
+    <header>
+        <h4>Doctor Name</h4>
+        <p>Doctor Email</p>
+    </header>
+
+    <main>
+        <div class="left-panel">
+            <!-- Personal Dashboard Section -->
+            <div class="dashboard">
+                <div class="user-info">
+                    <img src="https://via.placeholder.com/50" alt="User Avatar" class="avatar">
+                    <p class="username">Hardik Makkar</p>
+                    <p class="email">hardikmakkar27</p>
+                </div>
+
+                <div class="dashboard-links">
+                    <ul>
+                        <!-- Use click event binding and class binding correctly -->
+                        <li><a href="#" (click)="setActiveSection('clinic') ; $event.preventDefault()" [class.active]="activeSection === 'clinic'">My Clinic</a></li>
+                        <li><a href="#" (click)="setActiveSection('exercises') ; $event.preventDefault()" [class.active]="activeSection === 'exercises'">Exercises</a></li>
+                        <li><a href="#" (click)="setActiveSection('calibrate') ; $event.preventDefault()" [class.active]="activeSection === 'calibrate'">Calibrate</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="body-content">
+            <!-- Conditional Rendering for Clinic Section -->
+            <div *ngIf="activeSection === 'clinic'">
+                <div class="patient-management">
+                    <div class="text-section">
+                        <h3>Manage Patients</h3>
+                    </div>
+                    <div class="button-section">
+                        <button class="add-patient" (click)="openAddPatientForm()">Invite Patient</button>
+                    </div>
+                </div>
+
+                <!-- Add Patient Modal -->
+                <div class="modal" *ngIf="showAddPatientForm">
+                    <div class="modal-content">
+                        <span class="close" (click)="closeAddPatientForm()">&times;</span>
+                        <h2>Add New Patient</h2>
+                        <form (ngSubmit)="submitPatientForm()">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" id="firstName" [(ngModel)]="newPatient.firstName"  name="firstName" required>
+
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" id="lastName" [(ngModel)]="newPatient.lastName" name="lastName" required>
+
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" [(ngModel)]="newPatient.email" name="email" required>
+
+                            <label for="mobile">Mobile Number:</label>
+                            <input type="tel" id="mobile" [(ngModel)]="newPatient.mobile" name="mobile" required>
+
+                            <label for="language">Language:</label>
+                            <select id="language" [(ngModel)]="newPatient.language" name="language" required>
+                                <option value="english">English</option>
+                                <option value="spanish">Spanish</option>
+                                <option value="french">French</option>
+                                <option value="hindi">Hindi</option>
+                            </select>
+
+                            <label for="message">Message:</label>
+                            <textarea id="message" [(ngModel)]="newPatient.message" name="message"></textarea>
+
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Patient List Table -->
+                <div class="patient-list">
+                    <h3>Patient List</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let patient of patients">
+                                <td>{{ patient.firstName }} {{ patient.lastName }}</td>
+                                <td>{{ patient.age }}</td>
+                                <td>{{ patient.email }}</td>
+                                <td>
+                                    <button (click)="openEditPatientForm(patient)">Edit</button>
+                                    <button (click)="openAssignExerciseForm(patient)">Assign Exercise</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Edit Patient Modal -->
+                <div class="modal" *ngIf="showEditPatientForm">
+                    <div class="modal-content">
+                        <span class="close" (click)="closeEditPatientForm()">&times;</span>
+                        <h2>Edit Patient</h2>
+                        <form (ngSubmit)="submitEditPatientForm()">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" id="firstName" [(ngModel)]="selectedPatient.firstName" name="firstName" required>
+
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" id="lastName" [(ngModel)]="selectedPatient.lastName" name="lastName" required>
+
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" [(ngModel)]="selectedPatient.email" name="email" required>
+
+                            <label for="age">Age:</label>
+                            <input type="number" id="age" [(ngModel)]="selectedPatient.age" name="age" required>
+
+                            <button type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Assign Exercise Modal -->
+                <div class="modal" *ngIf="showAssignExerciseForm">
+                    <div class="modal-content">
+                        <span class="close" (click)="closeAssignExerciseForm()">&times;</span>
+                        <h2>Assign Exercise</h2>
+                        <form (ngSubmit)="assignExerciseToPatient()">
+                            <label for="exercise">Select Exercise:</label>
+                            <select id="exercise" [(ngModel)]="selectedExercise" name="exercise" required>
+                                <option *ngFor="let exercise of exercises" [value]="exercise">{{ exercise.name }}</option>
+                            </select>
+
+                            <label for="message">Message to Patient:</label>
+                            <textarea id="message" [(ngModel)]="assignMessage" name="message"></textarea>
+
+                            <label for="timeout">Timeout (in minutes):</label>
+            <input type="number" id="timeout" [(ngModel)]="timeout" name="timeout" required min="1" placeholder="Enter timeout in minutes">
+
+                            <label for="timeout">Anaglyph Glass Type</label>
+            <input type="test" id="glassType" [(ngModel)]="glassType" name="glassType"  placeholder="Enter Anaglyph Glass Type">
+
+                            <button type="submit">Assign</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Exercises Section -->
+            <div *ngIf="activeSection === 'exercises'" class="exercise-section">
+                <div class="exercise-header">
+                    <input type="text" placeholder="Search Exercise" [(ngModel)]="searchQuery" class="search-bar">
+                    <button class="add-exercise" (click)="openAddExerciseForm()">Add Exercise</button>
+                </div>
+
+                <!-- Add Exercise Modal -->
+                <div class="modal" *ngIf="showAddExerciseForm">
+                    <div class="modal-content">
+                        <span class="close" (click)="closeAddExerciseForm()">&times;</span>
+                        <h2>Add New Exercise</h2>
+                        <form (ngSubmit)="submitExerciseForm()">
+                            <label for="exerciseName">Exercise Name:</label>
+                            <input type="text" id="exerciseName" [(ngModel)]="newExercise.name" name="exerciseName" required>
+
+                            <label for="description">Description:</label>
+                            <textarea id="description" [(ngModel)]="newExercise.description" name="description" required></textarea>
+
+                            <label for="instructions">Instructions:</label>
+                            <textarea id="instructions" [(ngModel)]="newExercise.instructions" name="instructions"></textarea>
+
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Exercise List -->
+                <div class="exercise-content">
+                    <div class="exercise-list" style="width: 15%; float: left;">
+                        <ul>
+                            <li *ngFor="let exercise of filteredExercises" (click)="selectExercise(exercise)">
+                                {{ exercise.name }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="exercise-details" style="width: 85%; float: right;">
+                        <h3>{{ selectedExercise?.name }}</h3>
+                        <p>{{ selectedExercise?.description }}</p>
+                        <p>{{ selectedExercise?.instructions }}</p>
+                    </div>
+                </div>
+            </div>
+  <!-- Calibrate Modal -->
+  <div class="modal1" *ngIf="showCalibrateModal">
+    <div class="modal1-content">
+        <span class="close"  (click)="closeCalibrateModal()">&times;</span>
+
+        <div class="carousel">
+            <div class="carousel-slide" *ngIf="currentSlide === 0">
+                <h2>Screen Height</h2>
+                <p>Description for Screen Height...</p>
+            </div>
+            <div class="carousel-slide" *ngIf="currentSlide === 1">
+                <h2>Working Distance</h2>
+                <p>Description for Working Distance...</p>
+            </div>
+            <div class="carousel-slide" *ngIf="currentSlide === 2">
+                <h2>Anaglyph Glasses</h2>
+                <p>Description for Anaglyph Glasses...</p>
+            </div>
+            <div class="carousel-slide" *ngIf="currentSlide === 3">
+                <h2>Colour Calibration</h2>
+                <p>Description for Colour Calibration...</p>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <button class="carousel-button prev" (click)="previousSlide()">&#10094;</button>
+            <button class="carousel-button next" (click)="nextSlide()">&#10095;</button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+</main>
+
+<!-- Footer Section -->
+<footer>
+<p>© 2024 Company Name. All rights reserved.</p>
+<p>Contact: clarityze.com | Phone: (123) 456-7890</p>
+</footer>
+</body>
+
+</html>

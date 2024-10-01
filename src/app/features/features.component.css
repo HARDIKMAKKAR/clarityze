@@ -1,0 +1,153 @@
+.contentdiv{
+    display: flex;
+    align-items: center;
+}
+.combined{
+    
+    width: 50%;
+    
+}
+.section-heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+.timg{
+    width: 50%;
+    
+}
+.second{
+    justify-content: center;
+}
+@media screen and (max-width: 992px){
+    .timg,.combined{
+        width: 100%;
+        height: 50%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        
+    }
+    .contentdiv{
+        display: inline-block;
+        padding-left: 20px;
+    }
+}
+@media screen and (max-width:576px){
+    .second{
+        justify-content: left;
+    }
+}
+.row1{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    margin: 20px 0px;
+    perspective: 1000px;
+    /* background-color: #00aeef; */
+    
+}
+
+.row2{
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0px;
+}
+.card{
+    width: 30%;
+    /* background-color: #00aeef; */
+    box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.2);
+}
+.card:hover{
+    transform: scale(1.01);
+}
+@media screen and (max-width: 992px){
+    .card{
+        width: 100%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        
+    }
+    .row1{
+        display: inline-block;
+
+    }
+}
+a:link{
+    color: #333;
+}
+a{
+    text-decoration: transparent;
+}
+li{
+    transition: all, 1s, ease-in-out, 0.5s;
+}
+li:hover{
+    transform: translateX(20px);
+}
+.fab{
+    /* background-color: #3B5998; */
+    color: #333;
+}
+.col{
+    display: flex;
+    align-items: center;
+}
+.font{
+    color : white;
+}
+.icons{
+    display: flex;
+    justify-content: space-around;
+    width: 100px;
+    
+}
+/* .back{
+    background-color: aqua;
+} */
+
+/* .card{
+    width: 30%;
+    /* position: relative; 
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+       
+}
+.card:hover{
+    transform: rotateY(180deg);
+}
+
+/* .card{
+    position: relative;
+}
+.back{
+    /* background-color: antiquewhite; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    /* height: 200px; 
+    padding-left:10px ;
+    box-shadow: 5px 5px 8px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    /* width: 100px; 
+}
+.back{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: antiquewhite;
+    
+    transform: rotateY(180deg);
+    
+}
+.frnt,.back{
+    /* position: absolute; 
+    
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    
+}  */
