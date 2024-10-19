@@ -12,15 +12,22 @@ export class LoginComponent {
     private auth  : AuthserviceService
   ){}
 
-  username = '';
-  password : number;
+  username  : string = '';
+  password : string;
 
   @Output() status = new EventEmitter <boolean>();
   
   onclick(){
     let red = this.auth.login(this.username , this.password);
+    console.log(red);
     if(red === 200){
-      this.route.navigate(['/doctor']);
+      this.route.navigate(['/doctor/clinic']);
+    }
+    else if (red === 400){
+      this.route.navigate(['/patient']);
+    }
+    else if (red === 600){
+      this.route.navigate(['/admin']);
     }
     else{
       alert('Invalid credentials');

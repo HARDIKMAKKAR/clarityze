@@ -1,0 +1,259 @@
+
+<div class="container">
+<div class="contain" style="padding: 20px; background-color: #fafafa;">
+    <div class="row1">
+      <div class="card" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; margin: 10px; background-color: #ffffff;" (click)="openModal(); showAdvOption()">
+        <div class="frnt">
+         
+          <h3 style="font-family: 'Garamond', serif; color: #333;">Catch the ball</h3>
+        </div>
+        <!-- <div class="back" style="padding: 10px;">
+          <p style="font-family: 'Arial', sans-serif; color: #555;">Monocular therapies: Good eye of the patient is occluded and the therapy is done for the affected eye.</p>
+        </div> -->
+      </div>
+  
+      <div class="card" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; margin: 10px; background-color: #ffffff;" (click)="openModal()">
+        <div class="frnt">
+          
+          <h3 style="font-family: 'Garamond', serif; color: #333;">Shoot the bubble</h3>
+        </div>
+        <!-- <div class="back" style="padding: 10px;">
+          <p style="font-family: 'Arial', sans-serif; color: #555;">Monocular fixation in binocular field: Patient wears red-blue glasses and contents of the therapy are projected in such a way that the patient views the target with the amblyopic eye and the background with the fellow eye.</p>
+        </div> -->
+      </div>
+  
+      <div class="card" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; margin: 10px; background-color: #ffffff;" (click)="openModal()">
+        <div class="frnt">
+         
+          <h3 style="font-family: 'Garamond', serif; color: #333;">Save the earth</h3>
+        </div>
+        <!-- <div class="back" style="padding: 10px;">
+          <p style="font-family: 'Arial', sans-serif; color: #555;">This procedure is designed in such a way that the patient can complete the task only when he uses both eyes. This is to eliminate suppression.</p>
+        </div> -->
+      </div>
+    </div>
+  
+    <div class="row1">
+      <div class="card" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; margin: 10px; background-color: #ffffff;" (click)="openModal(); showAdvOption()">
+        <div class="frnt">
+          
+          <h3 style="font-family: 'Garamond', serif; color: #333;">Escape the alligator</h3>
+        </div>
+        <!-- <div class="back" style="padding: 10px;">
+          <p style="font-family: 'Arial', sans-serif; color: #555;">Here the patient's capacity to adjust the focusing abilities of his eyes is trained.</p>
+        </div> -->
+      </div>
+  
+      <div class="card" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; margin: 10px; background-color: #ffffff;" (click)="openModal()">
+        <div class="frnt">
+          
+          <h3 style="font-family: 'Garamond', serif; color: #333;">Endless flight</h3>
+        </div>
+        <!-- <div class="back" style="padding: 10px;">
+          <p style="font-family: 'Arial', sans-serif; color: #555;">The patient has the problem of converging or diverging the eyes appropriately, which may result in eyestrain, headaches, double vision, etc.</p>
+        </div> -->
+      </div>
+  
+      <!-- <div class="card" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; margin: 10px; background-color: #ffffff;" (click)="openModal()">
+        <div class="frnt">
+          
+          <h3 style="font-family: 'Garamond', serif; color: #333;">Depth Perception</h3>
+        </div>
+        <div class="back" style="padding: 10px;">
+          <p style="font-family: 'Arial', sans-serif; color: #555;">The patient experiences problems in viewing space in 3D, affecting various activities and limiting work.</p>
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+
+  <div class="modal" *ngIf="isModalOpen" >
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <form (ngSubmit)="onSubmit($event.target)">
+        <div class="dropdown-container">
+          <label for="dropdown1" style="color: gray;">Level:</label>
+          <div class="dropdown">
+            <input type="text" id="dropdown1" [(ngModel)]="selectedDropdown1" (focus)="showOptions('options1')" (blur)="hideOptions()" name="dropdown1" style=" border: none; border-bottom: 0.5px solid black;" />
+            <div *ngIf="options1Visible" class="options">
+              <div *ngFor="let option of options1" (click)="selectOption(option.label, 'selectedDropdown1')" [class.highlighted]="selectedDropdown1 === option.label">
+               <div class="show" style="height: fit-content; padding: 0%; margin: 0%;">
+                {{ option.label }}
+                <div class="detail" style="height: fit-content; padding: 0%; margin: 0%; color: gray;">
+                  {{ option.detail }}
+                </div>
+               </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="dropdown-container">
+          <label for="dropdown2" style="color: gray;">Anaglyph Glasses:</label>
+          <div class="dropdown">
+            <input type="text" id="dropdown2" [(ngModel)]="selectedDropdown2" (focus)="showOptions('options2')" (blur)="hideOptions()" name="dropdown2" style=" border: none; border-bottom: 0.5px solid black;"/>
+            <div *ngIf="options2Visible" class="options">
+              <div *ngFor="let option of options2" (click)="selectOption(option, 'selectedDropdown2')" [class.highlighted]="selectedDropdown2 === option">
+                {{ option }}
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="dropdown-container">
+          <label for="dropdown3" style="color: gray;">Background Color:</label>
+          <div class="dropdown">
+            <input type="text" id="dropdown3" [(ngModel)]="selectedDropdown3" (focus)="showOptions('options3')" (blur)="hideOptions()" name="dropdown3" style=" border: none; border-bottom: 0.5px solid black;"/>
+            <div *ngIf="options3Visible" class="options">
+              <div *ngFor="let option of options3" (click)="selectOption(option, 'selectedDropdown3')" [class.highlighted]="selectedDropdown3 === option">
+                {{ option }}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div class="container" style="display: flex; justify-content: space-evenly;">
+
+          <div>
+            <div class="form-container" [ngClass]="{'fade-in': !isFormVisible, 'fade-out': isFormVisible}" >
+            <label for="timeInput" style="color: gray;">min sec</label>
+            <input type="time" id="timeInput" name="timeInput" value="02:00" required style=" border: none; border-bottom: 0.5px solid black;"/>
+          </div>
+          </div>
+
+          <label class="toggle" >
+              <input type="checkbox" (click)="formStatus()" />
+              <span class="slider"></span>
+          </label>
+
+          
+      
+          <div class="form-container"  [ngClass]="{'fade-in': isFormVisible, 'fade-out': !isFormVisible}" >
+              <label for="singleInput">Bounces:</label>
+              <input type="number" id="singleInput" [(ngModel)]="inputValue" placeholder="Enter number of bounces" style=" border: none; border-bottom: 0.5px solid black;"/>
+          </div>
+      </div>
+  
+        <!-- <div class="dropdown-container" >
+          <label for="dropdown4">Dropdown 4:</label>
+          <div class="dropdown">
+            <input type="text" id="dropdown4" [(ngModel)]="selectedDropdown4" (focus)="showOptions('options4')" (blur)="hideOptions()" name="dropdown4" />
+            <div *ngIf="options4Visible" class="options">
+              <div *ngFor="let option of options4" (click)="selectOption(option, 'selectedDropdown4')" [class.highlighted]="selectedDropdown4 === option">
+                {{ option }}
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="nested" *ngIf="advVisible" >
+          <div class="AdvOption" (click)="showNested()">
+            <h5 >Advanced Options </h5>
+            <div class="caret-button" id="toggleButton">
+              <span>{{ nestedVisible ? '▲' : '▼' }}</span>
+
+          </div>
+            
+          </div>
+          <div class="nestedInput" *ngIf="nestedVisible">
+            <div class="dropdown-container" >
+              <label for="dropdown4">Dropdown 4:</label>
+              <div class="dropdown">
+                <input type="text" id="dropdown4" [(ngModel)]="selectedDropdown4" (focus)="showOptions('options4')" (blur)="hideOptions()" name="dropdown4" />
+                <div *ngIf="options4Visible" class="options">
+                  <div *ngFor="let option of options4" (click)="selectOption(option, 'selectedDropdown4')" [class.highlighted]="selectedDropdown4 === option">
+                    {{ option }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        
+        <button  class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- <div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <form (ngSubmit)="onSubmit($event.target)">
+        <div>
+          <label for="dropdown1">Dropdown 1:</label>
+          <select id="dropdown1" name="dropdown1">
+            <option *ngFor="let option of options1" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <div>
+          <label for="dropdown2">Dropdown 2:</label>
+          <select id="dropdown2" name="dropdown2">
+            <option *ngFor="let option of options2" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <div>
+          <label for="dropdown3">Dropdown 3:</label>
+          <select id="dropdown3" name="dropdown3">
+            <option *ngFor="let option of options3" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <div>
+          <label for="dropdown4">Dropdown 4:</label>
+          <select id="dropdown4" name="dropdown4">
+            <option *ngFor="let option of options4" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <div>
+          <label for="timeInput">Time:</label>
+          <input type="time" id="timeInput" name="timeInput" required />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div> -->
+
+
+  <!-- <div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <form (ngSubmit)="onSubmit($event.target)">
+        <div>
+          <label for="dropdown1">Dropdown 1:</label>
+          <input type="text" id="dropdown1" [(ngModel)]="selectedDropdown1" name="dropdown1" list="options1" />
+          <datalist id="options1">
+            <option *ngFor="let option of options1" [value]="option">{{ option }}</option>
+          </datalist>
+        </div>
+        <div>
+          <label for="dropdown2">Dropdown 2:</label>
+          <input type="text" id="dropdown2" [(ngModel)]="selectedDropdown2" name="dropdown2" list="options2" />
+          <datalist id="options2">
+            <option *ngFor="let option of options2" [value]="option">{{ option }}</option>
+          </datalist>
+        </div>
+        <div>
+          <label for="dropdown3">Dropdown 3:</label>
+          <input type="text" id="dropdown3" [(ngModel)]="selectedDropdown3" name="dropdown3" list="options3" />
+          <datalist id="options3">
+            <option *ngFor="let option of options3" [value]="option">{{ option }}</option>
+          </datalist>
+        </div>
+        <div>
+          <label for="dropdown4">Dropdown 4:</label>
+          <input type="text" id="dropdown4" [(ngModel)]="selectedDropdown4" name="dropdown4" list="options4" />
+          <datalist id="options4">
+            <option *ngFor="let option of options4" [value]="option">{{ option }}</option>
+          </datalist>
+        </div>
+        <div>
+          <label for="timeInput">Time:</label>
+          <input type="time" id="timeInput" name="timeInput" required />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div> -->
+ 
+</div>

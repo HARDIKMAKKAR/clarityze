@@ -7,22 +7,23 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthserviceService {
  
+  
   private loggedIn = new BehaviorSubject<boolean>(false);
   loggedInStatus = this.loggedIn.asObservable();
-  usernamee : string = 'hardik';
-  passwordd : number = 2005;
   constructor(private router : Router) { }
   
-  login(username : string , password : number){
-    
-    if(this.usernamee === 'hardik' && this.passwordd === 2005){
+  login(username : string , password : string){
+  
+    if(username === 'hardik' && password === '2005'){
       this.loggedIn.next(true);
       return 200;
     }
-    else if (this.usernamee === 'patient' && this.passwordd === 123){
+    else if (username === 'patient' && password=== '123'){
+      this.loggedIn.next(true);
       return 400;
     }
-    else if (this.usernamee === 'admin' && this.passwordd === 123){
+    else if (username === 'admin' && password=== '123'){
+      this.loggedIn.next(true);
       return 600;
     }
     else {

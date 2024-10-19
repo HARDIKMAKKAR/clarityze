@@ -13,6 +13,11 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { DoctorLandingPageComponent } from './doctor-landing-page/doctor-landing-page.component';
 import { PatientLandingPageComponent } from './patient-landing-page/patient-landing-page.component';
+import { ExerciseListComponent } from './exercise-list/exercise-list.component';
+import { ClinicComponent } from './clinic/clinic.component';
+import { CaliberateComponent } from './caliberate/caliberate.component';
+import { PatientExercisesComponent } from './patient-exercises/patient-exercises.component';
+import { AdminLandingPageComponent } from './admin-landing-page/admin-landing-page.component';
 // import { AdminLandingPageComponent } from './admin-landing-page/admin-landing-page.component';
 
 @NgModule({
@@ -27,7 +32,12 @@ import { PatientLandingPageComponent } from './patient-landing-page/patient-land
     SignupComponent,
     DoctorLandingPageComponent,
     PatientLandingPageComponent,
-    // AdminLandingPageComponent
+    ExerciseListComponent,
+    ClinicComponent,
+    CaliberateComponent,
+    PatientExercisesComponent,
+    PatientLandingPageComponent,
+    AdminLandingPageComponent
   ],
   imports: [
     BrowserModule,

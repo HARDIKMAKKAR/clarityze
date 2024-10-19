@@ -1,127 +1,55 @@
-<!-- Conditionally Render Components -->
-<div *ngIf="activeSection === 'clinic'">
-    <div class="patient-management">
-        <div class="text-section">
-            <h3>Manage Patients</h3>
-        </div>
-        <div class="button-section">
-            <button class="add-patient" (click)="openAddPatientForm()">Invite Patient</button>
-            <!-- <button class="delete-patient">Delete Patient</button> -->
-        </div>
-    </div>
-
-    <!-- Modal for Adding Patient -->
-    <div class="modal" *ngIf="showAddPatientForm">
-        <div class="modal-content">
-            <span class="close" (click)="closeAddPatientForm()">&times;</span>
-            <h2>Add New Patient</h2>
-            <p>Invite a client to use clarityze. They will be sent an email with a link to create an account
-                on clarityze. They may also use the invitation code provided.
-
-                This user will only count towards usage for billing purposes when they accept the invitation
-                and create their account.
-
-                Don't use this form to invite staff or adminitrative users, instead use the "STAFF" menu
-                item found under "MY CLINIC".</p>
-            <form (ngSubmit)="submitPatientForm()">
-                <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" [(ngModel)]="newPatient.firstName" name="firstName"
-                    required>
-
-                <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" [(ngModel)]="newPatient.lastName" name="lastName" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" [(ngModel)]="newPatient.email" name="email" required>
-
-                <label for="mobile">Mobile Number:</label>
-                <input type="tel" id="mobile" [(ngModel)]="newPatient.mobile" name="mobile" required>
-
-                <label for="language">Language:</label>
-                <select id="language" [(ngModel)]="newPatient.language" name="language" required>
-                    <option value="english">English</option>
-                    <option value="spanish">Spanish</option>
-                    <option value="french">French</option>
-                    <option value="hindi">Hindi</option>
-                </select>
-
-                <label for="message">Message:</label>
-                <textarea id="message" [(ngModel)]="newPatient.message" name="message"></textarea>
-
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    </div>
-
-</div>
-
-
-<html lang="en"></html>
-
+<html lang="en">
 <body>
     <header>
-        <h4>Doctor Name</h4>
-        <p>Doctor Email</p>
+        <h1 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;text-align: left;">Clarityze</h1>
     </header>
-
     <main>
         <div class="left-panel">
             <!-- Personal Dashboard Section -->
             <div class="dashboard">
                 <div class="user-info">
-                    <img src="https://via.placeholder.com/50" alt="User Avatar" class="avatar">
-                    <p class="username">Hardik Makkar</p>
-                    <p class="email">hardikmakkar27</p>
-
+                    <img style="height: 50px; width: 50px;"  src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAqAMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQcDBAYBAv/EADgQAAEEAAIHBgMHBAMAAAAAAAABAgMEBREGEiExQVFhEyJxscHRMoGRJDNCUmKSoRY0cnMUFSP/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAWEQEBAQAAAAAAAAAAAAAAAAAAARH/2gAMAwEAAhEDEQA/ALSABpkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABtNbEL9bD4O2syI1q7GpxcvJE4nIX9LrkrnNpMZXZzVNZ/sgHcfQbStf++xbPW/58ufy9iSoaXXInNbdYywzmiar/ZQO4BrUL9bEIO2qyI5qbHJxavJU4GyAAAAAAAAAAAAAAAAAAAAwXbUVKrLZnVezjbmuW9eidTOchpzdXtIKTHbE/wDR6Jz4J5gc9ieITYlbdYnXf8LeDU5IagBpAAAbeF35sMttsV12psc3PY9OSlk0rUV2rFZgXNkjc0Rd6dF6lVnWaDXV7Sek92xU7VqL/KeRlXXgAAAAAAAAAAAAAAAAAAV1pW9X4/az/DqtTw1ULFK80tZqY/YXLY9GOT9qeygQ4ANIAAAS2ij1Zj9XL8Ws1f2r7ESTGiTNfH665bGI9y/tVPVDKrDAAAAAAAAAAAAAAAAAAA5DTumqSV7jU2Zdk7x3p6nXmvfpxX6ctadF1JG5Zou1F4KnUCrAbeJYdPhtlYbLV5tenwvTmhqF0wAA0wOs0EqKsli45NiJ2TfHevoc9hmHz4lZSGu1ebnqndYnNSyKFOKjTiqwIupG3LNV2qvFV6kGwAAAAAAAAAAAAAAAAAAAAAw2q0FuFYrMTJGLwdw69CAtaHVJHZ1rEsP6VRHp6KTtu9UppnasxRdHu2/TeRU2leFxrk10sq/oZl5gRf8ARcmf9+zL/UvublXQ2pG7OzYlm/SiIxPVT6/rKjn9xY+iGaLSvC3rk58sX+bM0/gCXq1oKkKRVomRsTg3j7mY16l6pcTOrZil6Mcmf03mwAAAAAAAAAAAAAAAAAAI3G8Xhwqtru1XzP8Au48/i6r0Az4jiFbDoO1tSaqL8KJvd4IcbielNy2rmVfs0O5NVe+vivD5ERduT3rDp7UivkX6InJE4IYAPXKrnK5znOcu9VXNVPACoAAuD1qq1yOa5zXJuVF2oTuGaU3KitZa+0w7u8vfTwXiQIILQw7EK2IwdrVk1kT4kXe3xQ2yq6VyxRsNnqyKyRPoqclTihYWCYvDitbXbkyZn3kefw9U6EVJAAAAAAAAAAAAAMF21FSqyWJlyZG3NevJPmVpiV6bEbklmx8TlyRODU5IdBpvfWSaKhG7uM78mXFy7s/BPNDlgAALEoACgAAAAAGzht6bDrcdmuveauSpwcnJTWBKsWpStRXasdiBc2SNzT1T5Gc43Qi+sc0tCR3df348+Cpv+qeSnZEAAAAAAAAA8cqIiq7YiJmq9OJ6aOOSrDg92RuxexciLyz2eoFcXbLrlyay5dsr1dt4JwMI8AWJQAFAAAAAAAAAAEpGelYdTuQ2W74no7JOKcS02qjmo5u1q7UXpwKlLNwOVZsHpSO2qsLUX5bPQK3gAQAAAAAAitKVywC3l+VPNDwAV0ACxAAFAAAAAAAAAAACxtFlzwCpn+VfNTwEpEsACNAACP/Z" alt="User Avatar" class="avatar">
+                    <p class="username">Admin name</p>
+                    <p class="email">Admin Email</p>
                 </div>
                 <div class="dashboard-links">
                     <ul>
-                        <li><a (click)="setActiveSection('clinic')" [class.active]="activeSection === 'clinic'">My
-                                Clinic</a></li>
-                        <li><a (click)="setActiveSection('exercises')"
-                                [class.active]="activeSection === 'exercises'">Exercises</a></li>
-                        <li><a (click)="setActiveSection('calibrate')"
-                                [class.active]="activeSection === 'calibrate'">Calibrate</a></li>
+                        <li><a href="#">Manage Profiles</a></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
                 </div>
             </div>
-            <!-- patient Information Section -->
         </div>
-        <div class="body-content">
-            <!-- Conditionally Render Components -->
-<div *ngIf="activeSection === 'clinic'">
-    <div class="patient-management">
-        <div class="text-section">
-            <h3>Manage Patients</h3>
-        </div>
-        <div class="button-section">
-            <button class="add-patient" (click)="openAddPatientForm()">Invite Patient</button>
-        </div>
-    </div>
 
-    <!-- Modal for Adding Patient -->
-    <div class="modal" *ngIf="showAddPatientForm">
+        <div class="body-content">
+            <div class="list-container">
+                <!-- Doctor Table -->
+                <div class="table-section">
+                        <div *ngIf="!showAddDoctorForm" class="block">
+                            <h2 style="display: contents;" >Doctors</h2> || 
+                        <button class="add-doctor" (click)="openDoctorForm()"> Add Doctor</button>    
+                        </div>
+                        <!-- Add Patient Modal -->
+
+    <div class="modal" *ngIf="showAddDoctorForm">
         <div class="modal-content">
-            <span class="close" (click)="closeAddPatientForm()">&times;</span>
-            <h2>Add New Patient</h2>
-            <p>Invite a client to use clarityze. They will be sent an email with a link to create an account on
-                clarityze. They may also use the invitation code provided.</p>
-            <form (ngSubmit)="submitPatientForm()">
+            <span class="close" (click)="closeAddDoctorForm()">&times;</span>
+            <h2>Add New Doctor</h2>
+            <form >
                 <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" [(ngModel)]="newPatient.firstName" name="firstName" required>
+                <input type="text" id="firstName"   name="firstName" required>
 
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" [(ngModel)]="newPatient.lastName" name="lastName" required>
+                <input type="text" id="lastName"  name="lastName" required>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" [(ngModel)]="newPatient.email" name="email" required>
+                <input type="email" id="email" name="email" required>
 
                 <label for="mobile">Mobile Number:</label>
-                <input type="tel" id="mobile" [(ngModel)]="newPatient.mobile" name="mobile" required>
+                <input type="tel" id="mobile" name="mobile" required>
 
                 <label for="language">Language:</label>
-                <select id="language" [(ngModel)]="newPatient.language" name="language" required>
+                <select id="language"  name="language" required>
                     <option value="english">English</option>
                     <option value="spanish">Spanish</option>
                     <option value="french">French</option>
@@ -129,168 +57,104 @@
                 </select>
 
                 <label for="message">Message:</label>
-                <textarea id="message" [(ngModel)]="newPatient.message" name="message"></textarea>
+                <textarea id="message" name="message"></textarea>
 
                 <button type="submit">Submit</button>
             </form>
         </div>
     </div>
-
-    <!-- Table of Patients -->
-    <div class="patient-list">
-        <h3>Patient List</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let patient of patients">
-                    <td>{{ patient.firstName }} {{ patient.lastName }}</td>
-                    <td>{{ patient.age }}</td>
-                    <td>{{ patient.email }}</td>
-                    <td>
-                        <button (click)="openEditPatientModal(patient)">Edit</button>
-                        <button (click)="openAssignExerciseModal(patient)">Assign Exercise</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Modal for Editing Patient -->
-    <div class="modal" *ngIf="showEditPatientForm">
-        <div class="modal-content">
-            <span class="close" (click)="closeEditPatientModal()">&times;</span>
-            <h2>Edit Patient</h2>
-            <form (ngSubmit)="submitEditPatientForm()">
-                <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" [(ngModel)]="selectedPatient.firstName" name="firstName" required>
-
-                <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" [(ngModel)]="selectedPatient.lastName" name="lastName" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" [(ngModel)]="selectedPatient.email" name="email" required>
-
-                <label for="age">Age:</label>
-                <input type="number" id="age" [(ngModel)]="selectedPatient.age" name="age" required>
-
-                <button type="submit">Save</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal for Assigning Exercise -->
-    <div class="modal" *ngIf="showAssignExerciseForm">
-        <div class="modal-content">
-            <span class="close" (click)="closeAssignExerciseModal()">&times;</span>
-            <h2>Assign Exercise</h2>
-            <form (ngSubmit)="submitAssignExerciseForm()">
-                <label for="exercise">Select Exercise:</label>
-                <select id="exercise" [(ngModel)]="selectedExercise" name="exercise" required>
-                    <option *ngFor="let exercise of exercises" [value]="exercise.id">{{ exercise.name }}</option>
-                </select>
-
-                <label for="message">Message to Patient:</label>
-                <textarea id="message" [(ngModel)]="assignMessage" name="message"></textarea>
-
-                <button type="submit">Assign</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-            <!-- Exercises Section -->
-            <div *ngIf="activeSection === 'exercises'" class="exercise-section">
-                <!-- Exercise Header -->
-                <div class="exercise-header">
-                    <input type="text" placeholder="Search Exercise" [(ngModel)]="searchQuery" class="search-bar">
-                    <button class="add-exercise" (click)="openAddExerciseForm()">Add Exercise</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Age</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dr. John Smith</td>
+                                <td>john.smith.com</td>
+                                <td>45</td>
+                                <td>
+                                    <button class="edit-btn" (click)="openModal('edit', doctors)">✏️ Edit</button>
+                                    <button class="delete-btn" (click)="openModal('delete', doctors)">🗑️ Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dr. Jane Doe</td>
+                                <td>jane.doecom</td>
+                                <td>38</td>
+                                <td>
+                                    <button class="edit-btn" (click)="openModal('edit', doctors)">✏️ Edit</button>
+                                    <button class="delete-btn" (click)="openModal('delete', doctors)">🗑️ Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <!-- Modal for Adding Exercise -->
-                <div class="modal" *ngIf="showAddExerciseForm">
-                    <div class="modal-content">
-                        <span class="close" (click)="closeAddExerciseForm()">&times;</span>
-                        <h2>Add New Exercise</h2>
-                        <form (ngSubmit)="submitExerciseForm()">
-                            <label for="exerciseName">Exercise Name:</label>
-                            <input type="text" id="exerciseName" [(ngModel)]="newExercise.name" name="exerciseName"
-                                required>
-
-                            <label for="description">Description:</label>
-                            <textarea id="description" [(ngModel)]="newExercise.description" name="description"
-                                required></textarea>
-
-                            <label for="instructions">Instructions:</label>
-                            <textarea id="instructions" [(ngModel)]="newExercise.instructions"
-                                name="instructions"></textarea>
-
-                            <button type="submit">Submit</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Main Layout: Left Panel (List of Exercises) and Right Panel (Exercise Details) -->
-                <div class="exercise-content">
-                    <!-- Left Panel (15%) -->
-                    <div class="exercise-list" style="width: 15%; float: left;">
-                        <ul>
-                            <li *ngFor="let exercise of filteredExercises" (click)="selectExercise(exercise)">
-                                {{exercise.name}}
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Right Panel (85%) -->
-                    <div class="exercise-details" style="width: 85%; float: right;">
-                        <h3>{{selectedExercise?.name}}</h3>
-                        <p>{{selectedExercise?.description}}</p>
-                        <p>{{selectedExercise?.instructions}}</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Calibrate Modal -->
-            <div class="modal1" *ngIf="showCalibrateModal">
-                <div class="modal1-content">
-                    <span class="close"  (click)="closeCalibrateModal()">&times;</span>
-
-                    <div class="carousel">
-                        <div class="carousel-slide" *ngIf="currentSlide === 0">
-                            <h2>Screen Height</h2>
-                            <p>Description for Screen Height...</p>
-                        </div>
-                        <div class="carousel-slide" *ngIf="currentSlide === 1">
-                            <h2>Working Distance</h2>
-                            <p>Description for Working Distance...</p>
-                        </div>
-                        <div class="carousel-slide" *ngIf="currentSlide === 2">
-                            <h2>Anaglyph Glasses</h2>
-                            <p>Description for Anaglyph Glasses...</p>
-                        </div>
-                        <div class="carousel-slide" *ngIf="currentSlide === 3">
-                            <h2>Colour Calibration</h2>
-                            <p>Description for Colour Calibration...</p>
-                        </div>
-
-                        <!-- Navigation Buttons -->
-                        <button class="carousel-button prev" (click)="previousSlide()">&#10094;</button>
-                        <button class="carousel-button next" (click)="nextSlide()">&#10095;</button>
-                    </div>
+                <!-- Patient Table -->
+                <div *ngIf="true" class="table-section">
+                    <h2>Patients</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Age</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Emily Johnson</td>
+                                <td>emily.johnsoncom</td>
+                                <td>29</td>
+                                <td>
+                                    <button class="edit-btn" (click)="openModal('edit', patients)">✏️ Edit</button>
+                                    <button class="delete-btn" (click)="openModal('delete', patients)">🗑️ Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Michael Brown</td>
+                                <td>michael.browcom</td>
+                                <td>34</td>
+                                <td>
+                                    <button class="edit-btn" (click)="openModal('edit', patients)">✏️ Edit</button>
+                                    <button class="delete-btn" (click)="openModal('delete', patients)">🗑️ Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination" id="doctorPagination"></div>
                 </div>
             </div>
-
         </div>
-
-
     </main>
+
+    <!-- Edit Modal -->
+    <div class="modal" *ngIf="isModalOpen && modalType === 'edit'">
+        <div class="modal-content">
+            <span class="close" (click)="closeModal()">&times;</span>
+            <h2>Edit {{selectedItem.name}}</h2>
+            <form (ngSubmit)="submitEdit()">
+                <label for="name">Name:</label>
+                <input type="text" id="name" [(ngModel)]="selectedItem.name" name="name">
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" [(ngModel)]="selectedItem.email" name="email">
+                
+                <label for="age">Age:</label>
+                <input type="number" id="age" [(ngModel)]="selectedItem.age" name="age">
+                
+                <button type="submit">Save Changes</button>
+            </form>
+            
+        </div>
+    </div>
+
 
     <!-- Footer Section -->
     <footer>
@@ -298,5 +162,4 @@
         <p>Contact: clarityze.com | Phone: (123) 456-7890</p>
     </footer>
 </body>
-
 </html>

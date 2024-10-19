@@ -1,1 +1,47 @@
-<p>patient-landing-page works!</p>
+<html lang="en">
+<body>
+    <header>
+        <h2>Clarityze</h2>
+    </header>
+    <main>
+        <div class="left-panel">
+            <!-- Personal Dashboard Section -->
+            <div class="dashboard">
+                <button style="background-color: #E5E5EA ;padding: 0%;" (click)="OpenModal()">
+                    <div class="user-info" style="display: flex; flex-direction: row-reverse; align-items: center;">
+                        <div class="pic" style="padding-top: 5%;">
+                            <img src="https://via.placeholder.com/50" alt="User Avatar" class="avatar">
+                        </div>
+                        <div class="detail" style="overflow: hidden; margin-right: 2px; text-overflow: ellipsis;white-space: nowrap; width: 10vw;" >
+                            <p class="username" style="padding-bottom: 0%; margin-bottom: 0%;">{{ patient.title }} {{ patient.firstName }} {{ patient.lastName }}</p>
+                            <p class="email" style="color: gray; size: 1rem; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; margin-top: 0%; padding-top: 0%;">hardikmakkar27&#64;gmail.com</p>
+                        </div>                    
+                       
+                    </div>
+                </button>
+                <div class="dashboard-links">
+                    <!-- <div class="link1"><a routerLink="/patient/patient-exercises" style="color: black;" ><span><i class="fa fa-tasks" aria-hidden="true" ></i></span>&nbsp;&nbsp;Exercises</a></div> -->
+                    <ul>
+                        <!-- Use click event binding and class binding correctly -->
+                        <li><a routerLink="/patient/patient-exercises" style="color: black; display: block;"><span><i
+                                        class="fa fa-tasks" aria-hidden="true"></i></span>&nbsp;&nbsp;Exercises</a></li>
+                        <li><a routerLink="/patient/caliberate" style="color: black; display: block;"><span><i
+                                        class="fa fa-cogs" aria-hidden="true"></i></span>&nbsp;Calibrate</a></li>
+                        <li><a href="#" style="color: black; display: block;"><span><i class="fa fa-sign-out"
+                                        aria-hidden="true"></i></span>&nbsp;&nbsp;Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="body-content" style="padding: 0%; margin: 0%;">
+            <!-- Conditional Rendering for Clinic Section -->
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2024 Company Name. All rights reserved.</p>
+        <p>Contact: clarityze.com | Phone: (123) 456-7890</p>
+    </footer>
+</body>
+</html>

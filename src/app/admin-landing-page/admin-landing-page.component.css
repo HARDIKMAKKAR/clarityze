@@ -10,17 +10,20 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #ffffff; /* White background */
-  color: #333333; /* Dark grey text */
+  background-color: #ffffff;
+  color: #333333;
 }
 
 header {
   background-color: #C9E4CA; /* Soft green header */
   color: #333333; /* Dark grey text for header */
-  padding: 20px;
-  text-align: center;
+  /* padding: 20px; */
+  text-align: left;
+  /* padding-top: 1%; */
+  /* margin-left: 10%; */
+  padding-left: 1%;
+  height: 8vh;
 }
-
 main {
   display: flex;
   flex: 1;
@@ -28,8 +31,8 @@ main {
 
 /* Left Panel (Dashboard) */
 .left-panel {
-  flex: 0 0 15%; /* Adjusted to 15% */
-  background-color: #E5E5EA; /* Pale grey for sidebar */
+  flex: 0 0 15%;
+  background-color: #E5E5EA;
   padding: 20px;
   min-height: 100vh;
 }
@@ -45,13 +48,8 @@ main {
 
 .dashboard-links ul li a {
   text-decoration: none;
-  color: #007bff; /* Blue links */
-  cursor: pointer;
-}
-
-.dashboard-links ul li a.active {
-  font-weight: bold;
   color: #007bff;
+  cursor: pointer;
 }
 
 .dashboard .user-info {
@@ -64,104 +62,164 @@ main {
   margin-bottom: 10px;
 }
 
-.dashboard .user-info p {
-  margin: 5px 0;
-  color: #333333; /* Dark grey for text */
-}
-
-.dashboard-links ul li a:hover {
-  text-decoration: underline;
-  color: #0056b3; /* Darker blue on hover */
-}
-
-/* Body Content (Patient Management Section) */
+/* Body Content */
 .body-content {
-  flex: 0 0 85%; /* Adjusted to 85% */
+  flex: 0 0 85%;
   padding: 20px;
-  background-color: #ffffff; /* White background for body */
+  background-color: #ffffff;
 }
 
-.patient-management {
+.list-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* Align doctor and patient tables side by side */
+}
+
+.table-section {
+  width: 48%;
+  /* Adjusted width for side-by-side tables */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #C9E4CA;
   margin-bottom: 20px;
 }
 
-.text-section h3 {
-  margin-bottom: 5px;
-  color: #333333; /* Dark grey heading */
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
 }
 
-.text-section p {
-  font-size: 16px;
-  color: #666666; /* Medium grey for patient details */
+th {
+  background-color: #A8D8B9;
+  color: #333;
 }
 
-.button-section {
-  display: flex;
-  gap: 10px;
+tr:nth-child(even) {
+  background-color: #E9F5E0;
 }
 
-.add-patient, .delete-patient {
-  background-color: #C9E4CA; /* Soft green buttons */
-  color: #333333; /* Dark grey text */
+tr:hover {
+  background-color: #B3D9B3;
+}
+
+button {
+  background-color: #72808f;
+  color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 5px 10px;
   cursor: pointer;
-  font-size: 16px;
   border-radius: 4px;
+  margin-right: 5px;
 }
 
-.add-patient:hover, .delete-patient:hover {
-  background-color: #A8D5B1; /* Darker soft green on hover */
+button:hover {
+  background-color: #0056b3;
 }
 
-/* Footer Section */
 footer {
-  background-color: #C9E4CA; /* Soft green footer */
-  color: #333333; /* Dark grey text */
+  background-color: #C9E4CA;
+  color: #333333;
   text-align: center;
   padding: 10px;
   font-size: 14px;
 }
 
-/* Modal styling */
-.modal {
-  display: flex;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
+
+.table-section {
+  margin-bottom: 40px;
+}
+
+table {
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
-  justify-content: center;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px;
+  margin: 5px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Opaque background */
+  backdrop-filter: blur(10px);
+  display: flex;
   align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  
 }
 
 .modal-content {
-  background-color: white;
+  background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
-  width: 600px; /* Wider than height */
-  max-width: 90%;
-  max-height: 80%;
-  overflow-y: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  width: 300px;
+  position: relative;
+  max-height: 90vh;
+  width: 90vw;
+  overflow-y: scroll;
 }
 
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 15px;
   cursor: pointer;
+  font-size: 20px;
+  color: #333;
 }
 
-.close:hover, .close:focus {
-  color: black;
+
+form {
+  display: flex;
+  flex-direction: column;
 }
+
+input {
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.add-doctor{
+  background-color: #C9E4CA; /* Soft green buttons */
+    color: #333333; /* Dark grey text */
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.block{
+  padding: 3px;
+}
+
 
 /* Form styling inside modal */
 form {
@@ -199,6 +257,7 @@ form button:hover {
   background-color: #A8D5B1; /* Darker soft green on hover */
 }
 
+
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
   main {
@@ -227,160 +286,4 @@ form button:hover {
   .modal-content {
       width: 90%;
   }
-}
-
-/* Exercise Section */
-.exercise-section {
-  padding: 20px;
-  background-color: #ffffff; /* White background */
-}
-
-.exercise-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.search-bar {
-  padding: 8px;
-  font-size: 16px;
-  width: 70%;
-  border: 1px solid #d3d3d3;
-  border-radius: 4px;
-  background-color: #E5E5EA; /* Pale grey background */
-}
-
-.add-exercise {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #C9E4CA; /* Soft green button */
-  color: #333333; /* Dark grey text */
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-exercise:hover {
-  background-color: #A8D5B1; /* Darker soft green on hover */
-}
-
-/* Exercise Content Layout */
-.exercise-content {
-  display: flex;
-  margin-top: 20px;
-}
-
-.exercise-list {
-  width: 15%;
-  background-color: #f5f5f5; /* Light grey background for the left panel */
-  border-right: 1px solid #d3d3d3; /* Light grey border on the right */
-  padding: 10px;
-}
-
-.exercise-list ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.exercise-list li {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #d3d3d3; /* Light grey border between items */
-}
-
-.exercise-list li:hover {
-  background-color: #e0e0e0; /* Slightly darker grey on hover */
-}
-
-.exercise-details {
-  width: 85%;
-  padding: 20px;
-  background-color: #fafafa; /* Very light grey background */
-}
-
-.exercise-details h3 {
-  color: #333; /* Darker grey for headings */
-}
-
-.exercise-details p {
-  color: #666; /* Medium grey for text */
-}
-/* Calibrate Modal Styles */
-.modal1 {
-  position: fixed;
-  top: 12.5%;
-  left: 12.5%;
-  width: 85%;
-  height: 75%;
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal1-content {
-  background-color: #ffffff; /* White background for modal content */
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
-  text-align: center;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 24px;
-  cursor: pointer;
-  color: #666666; /* Medium grey close icon */
-}
-
-.close:hover {
-  color: #333333; /* Dark grey on hover */
-}
-
-/* Carousel Styles */
-.carousel {
-  position: relative;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-slide {
-  display: none;
-}
-
-.carousel-slide:nth-child(n+1) {
-  display: block;
-}
-
-.carousel-button {
-  position: absolute;
-  top: 50%;
-  background-color: #C9E4CA; /* Soft green for buttons */
-  border: none;
-  color: #333333; /* Dark grey text */
-  padding: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 50%;
-  transform: translateY(-50%);
-}
-
-.carousel-button:hover {
-  background-color: #A8D5B1; /* Darker soft green on hover */
-}
-
-.prev {
-  left: 10px;
-}
-
-.next {
-  right: 10px;
 }

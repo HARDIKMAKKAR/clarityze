@@ -1,0 +1,180 @@
+
+<!-- <div class="container"> -->
+    <div class="modal1" *ngIf="showCalibrateModal" >
+        <div class="modal1-content">
+            <span class="close" (click)="closeCalibrateModal()" >&times;</span>
+            <div class="roadmap">
+                <div class="roadmap-slide" [ngClass]="[this.currentSlide<4?'Active':'notActive']">
+
+                    <div *ngIf="currentSlide>0"  style="margin-right: 5%;"><i class="fa fa-check-circle " aria-hidden="true"></i></div>
+                    <div *ngIf="currentSlide===0" style="margin-right: 5%;"><div class="number-icon ">1</div></div><h6 style="margin-bottom: 0%;">Screen Height</h6>
+                </div>
+                <div class="line"></div>
+                <div class="roadmap-slide" [ngClass]="[this.currentSlide<4?'Active':'notActive',this.currentSlide>0?'Active':'notActive']" >
+                    <div *ngIf="currentSlide>1" style="margin-right: 5%;"><i class="fa fa-check-circle" aria-hidden="true"></i></div>
+                    <div *ngIf="currentSlide<2" style="margin-right: 5%;"><div class="number-icon">2</div></div><h6 style="margin-bottom: 0%;">Working Distance</h6>
+                </div>
+                <div class="line"></div>
+                <div class="roadmap-slide" [ngClass]="[this.currentSlide<4?'Active':'notActive',this.currentSlide>1?'Active':'notActive']">
+                    <div *ngIf="currentSlide>2" style="margin-right: 5%;"><i class="fa fa-check-circle" aria-hidden="true"></i></div>
+                    <div *ngIf="currentSlide<3" style="margin-right: 5%;"><div class="number-icon">3</div></div><h6 style="margin-bottom: 0%;">Anaglyph Glasses</h6>
+                </div>
+                <div class="line"></div>
+                <div class="roadmap-slide" [ngClass]="[this.currentSlide===3?'Active':'notActive']">
+                    <div *ngIf="currentSlide>4" style="margin-right: 5%;"><i class="fa fa-check-circle" aria-hidden="true"></i></div>
+                    <div *ngIf="currentSlide<4" style="margin-right: 5%;"><div class="number-icon">4</div></div><h6 style="margin-bottom: 0%;">Colour Caliberation</h6>
+                </div>
+            </div>
+            <span class="close" (click)="closeCalibrateModal()" >&times;</span>
+            <div class="carousel">
+                <div class="carousel-slide" *ngIf="currentSlide === 0">
+                    <h2>Screen Height</h2>
+                    <!-- <p>Description for Screen Height...</p> -->
+                     <hr>
+                    <div class="slide-detail">
+                        <div class="detail-heading">
+                            <h2>Your web-browser is zoomed</h2>
+                            <h5>We'll need to correct this before we can properly calibrate your device.
+                                We need the zoom level to be neutral, meaning neither zoomed-in nor zoomed-out.</h5>
+
+                        </div>
+                        <div class="detail-content">
+                            <div class="content-card">
+                                <h3>Press Ctrl-Zero to reset the zoom level.</h3>
+                            </div>
+                            <div class="content-card">
+                                <h3>Most of the time we automatically detect when the zoom level has been reset, 
+                                    but you can also manually confirm that the zoom level has been reset.</h3>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="carousel-slide" *ngIf="currentSlide === 1">
+                    <h2>Working Distance</h2>
+                    <br>
+                    <h4>How far do you sit from the screen? Measure the distance from your face to the screen. 
+                        If you don't have a measuring tape, you may omit this step.</h4>
+                    <br>
+                    <div class="input">
+                    <div class="input-group">
+                      <label for="cmInput">Centimeters: &nbsp;</label>
+                      <input type="number" [(ngModel)]="cmValue" (ngModelChange)="updateInches()" id="cmInput" />
+                    </div>
+                    <div class="input-group">
+                      <label for="inInput">Inches:  &nbsp;</label>
+                      <input type="number" [(ngModel)]="inchesValue" (ngModelChange)="updateCm()" id="inInput" />
+                    </div>
+                    </div>
+                    <div class="slider-group">
+                      <label for="lengthSlider">Adjust Length:</label>
+                      <input type="range" [(ngModel)]="cmValue" (ngModelChange)="updateInches()" min="10" max="500" step="2" id="lengthSlider" />
+                    </div>
+                    <hr>
+                    <button class="btn btn-primary" (click)="ContinueData()">Continue</button>
+                </div>
+                <div class="carousel-slide" *ngIf="currentSlide === 2">
+                    <h2>Anaglyph Glasses</h2>
+                    <div class="slide-detail">
+                        <div class="detail-heading">
+                            <h4>Select the style of anaglyph glasses you are using. 
+                                If you don't have anaglyph glasses, you may skip this step.</h4>
+                        </div>
+                        
+                           <div class="content1-card">
+                            <img 
+                            
+                            style="margin-right: 50px;"
+                            *ngFor="let img of images; let i = index" 
+
+                            [src]="img.src"
+                            [class.selected]="selectedImageIndex === i" 
+                            (click)="selectImage(i)"
+                            class="image-item"
+                          />
+                           </div>
+                      
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <div class="row" >
+                            <div class="col-xs-12" style="display: flex; align-items: center; justify-content: center;">
+                                <button class="btn btn-primary" (click)="ContinueData()" style="margin-right: 50px;">Continue
+                                </button>
+                                <p style="border: 2px solid black; width: max-content; align-items: center;" (click)="closeCalibrateModal()" >I dont Have Anaglyph Glasses</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-slide" *ngIf="currentSlide === 3">
+                    <h2>Colour Calibration</h2>
+                    <div class="slide-detail">
+                        <div class="detail-heading" style="text-align: left;">
+                            <ol>
+                                <li>Put on anaglyph glasses.</li>
+                                <li>While covering one eye, adjust the sliders below until you can barely see the 
+                                    circle against the black background.</li>
+                            </ol>
+                        </div>
+                        <div class="detail-content">
+                            <div class="content-card">
+                                <div class="image-detail">
+                                    Looking through the blue lens with your left eye and covering your right eye, 
+                                    adjust the slider until the red dot is barely visible.
+                                </div>
+                                <div class="image">
+                                    <div data-red class="box" id="colorBox">
+                                        <span id="redDot" class="dot" [style.backgroundColor]= redDotColor()></span>
+                                      </div>
+                                      <div class="slider-container">
+                                        <label for="brightnessRange">Adjust Brightness:</label>
+                                        <input
+                                          type="range"
+                                          id="brightnessRange"
+                                          min="20"
+                                          max="255"
+                                          [(ngModel)]="brightnessValue"
+                                          (input)="onBrightnessChange(brightnessValue)"
+                                          class="slider"
+                                        />
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="content-card">
+                                <div class="image-detail">
+                                    Looking through the blue lens with your left eye and covering your right eye, 
+                                    adjust the slider until the red dot is barely visible.
+                                </div>
+                                <div class="image">
+                                    <div data-red class="box" id="colorBox">
+                                        <span id="blueDot" class="dot" [style.backgroundColor]= blueDotColor()></span>
+                                      </div>
+                                      <div class="slider-container">
+                                        <label for="brightnessRange">Adjust Brightness:</label>
+                                        <input
+                                          type="range"
+                                          id="brightnessRange"
+                                          min="30"
+                                          max="255"
+                                          [(ngModel)]="brightnessValue1"
+                                          (input)="onBrightnessChange1(brightnessValue1)"
+                                          class="slider"
+                                        />
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <button class="btn btn-primary" (click)="updataData()">Continue</button>
+                </div>
+    
+                
+            </div>
+            <!-- Navigation Buttons -->
+            <button class="carousel-button prev" (click)="previousSlide()" >&#10094;</button>
+            <button class="carousel-button next" (click)="nextSlide()">&#10095;</button>
+        </div>
+    </div>
+    
+<!-- </div> -->

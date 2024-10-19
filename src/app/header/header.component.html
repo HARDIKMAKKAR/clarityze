@@ -1,7 +1,7 @@
-<div class="head" style="background-color: bisque;"> 
+<div class="head" style="background-color: bisque; margin: 0%;"> 
   <!-- <div class= [ngClass]="{'opaque-header': isOpaque, 'transparent-header': !isOpaque}"> -->
   <div style="margin-top: 0%; margin-bottom: 0%;" class="containerr">
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding: 0%;" >
         <div class="container-fluid" [ngClass]="{'opaque-header': !isOpaque, 'transparent-header': isOpaque}">
           <!-- <div class="container-fluid"> -->
           <!-- <div class="name company-name"> -->
@@ -17,7 +17,7 @@
                 <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}" class="nav-link" aria-current="page" href="#" style="color: #ffffff;">Home</a>
               </li>
               <li class="nav-item">
-                <a routerLink="/about" routerLinkActive="active" class="nav-link" href="#" style="color: #ffffff;">About</a>
+                <a routerLink="/about" routerLinkActive="active" class="nav-link" href="#" style="color: #ffffff;" >About</a>
               </li>
               <!-- <li class="nav-item">
                 <a routerLink="/eye-test" routerLinkActive="active" class="nav-link" href="#">Eye Test</a>
@@ -25,7 +25,7 @@
               <li class="nav-item">
                 <a routerLink="/features" routerLinkActive="active" class="nav-link" href="#" style="color: #ffffff;">Features</a>
               </li>
-              <button (click)="onLogin()"  routerLinkActive="active" routerLink="/login" type="button" class="btn btn-primary">Login</button>
+              <button (click)="onLogin()"  routerLinkActive="active" routerLink="/login" type="button" class="btn btn-success">Login</button>
             </ul>
           </div>
         </div>

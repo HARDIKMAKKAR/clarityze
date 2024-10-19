@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
     this.checkScroll();
   }
 
+  
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.checkScroll();

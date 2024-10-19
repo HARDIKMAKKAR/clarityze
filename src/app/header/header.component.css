@@ -14,7 +14,18 @@
 } */
 a:visited{
     color: blanchedalmond;
+    background-color: limegreen;
 }
+a:hover{
+    background-color: limegreen;
+}
+a:active{
+    background: limegreen;
+}
+::selection {
+    background: #4158d0;
+    color: #fff;
+  }
 .head{
     
     position: sticky;
@@ -46,3 +57,14 @@ a:visited{
     }
 
  }
+ button {
+   
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover{
+    background-color: limegreen;
+  }

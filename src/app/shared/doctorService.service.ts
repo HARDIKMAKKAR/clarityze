@@ -1,13 +1,9 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 
-@Component({
-  selector: 'app-doctor-landing-page',
-  templateUrl: './doctor-landing-page.component.html',
-  styleUrl: './doctor-landing-page.component.css'
-})
-export class DoctorLandingPageComponent {
-  assignMessage: any;
+@Injectable({providedIn : 'root'})
+export class DoctorService{
+    assignMessage: any;
     constructor(private router: Router) {}
   
     showAddPatientForm = false;
