@@ -1,27 +1,36 @@
 <html lang="en">
 <body>
     <header>
-        <h1 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;text-align: left;">
+        <h1 style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;text-align: left;">
             Clarityze</h1>
     </header>
     <main>
-        <div class="left-panel">
+        <div class="left-panel" style="padding-right: 0%;">
             <!-- Personal Dashboard Section -->
-            <div class="dashboard">
-                <div class="user-info">
-                    <img style="height: 50px; width: 50px;"
-                        src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAqAMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQcDBAYBAv/EADgQAAEEAAIHBgMHBAMAAAAAAAABAgMEBREGEiExQVFhEyJxscHRMoGRJDNCUmKSoRY0cnMUFSP/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAWEQEBAQAAAAAAAAAAAAAAAAAAARH/2gAMAwEAAhEDEQA/ALSABpkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABtNbEL9bD4O2syI1q7GpxcvJE4nIX9LrkrnNpMZXZzVNZ/sgHcfQbStf++xbPW/58ufy9iSoaXXInNbdYywzmiar/ZQO4BrUL9bEIO2qyI5qbHJxavJU4GyAAAAAAAAAAAAAAAAAAAAwXbUVKrLZnVezjbmuW9eidTOchpzdXtIKTHbE/wDR6Jz4J5gc9ieITYlbdYnXf8LeDU5IagBpAAAbeF35sMttsV12psc3PY9OSlk0rUV2rFZgXNkjc0Rd6dF6lVnWaDXV7Sek92xU7VqL/KeRlXXgAAAAAAAAAAAAAAAAAAV1pW9X4/az/DqtTw1ULFK80tZqY/YXLY9GOT9qeygQ4ANIAAAS2ij1Zj9XL8Ws1f2r7ESTGiTNfH665bGI9y/tVPVDKrDAAAAAAAAAAAAAAAAAAA5DTumqSV7jU2Zdk7x3p6nXmvfpxX6ctadF1JG5Zou1F4KnUCrAbeJYdPhtlYbLV5tenwvTmhqF0wAA0wOs0EqKsli45NiJ2TfHevoc9hmHz4lZSGu1ebnqndYnNSyKFOKjTiqwIupG3LNV2qvFV6kGwAAAAAAAAAAAAAAAAAAAAAw2q0FuFYrMTJGLwdw69CAtaHVJHZ1rEsP6VRHp6KTtu9UppnasxRdHu2/TeRU2leFxrk10sq/oZl5gRf8ARcmf9+zL/UvublXQ2pG7OzYlm/SiIxPVT6/rKjn9xY+iGaLSvC3rk58sX+bM0/gCXq1oKkKRVomRsTg3j7mY16l6pcTOrZil6Mcmf03mwAAAAAAAAAAAAAAAAAAI3G8Xhwqtru1XzP8Au48/i6r0Az4jiFbDoO1tSaqL8KJvd4IcbielNy2rmVfs0O5NVe+vivD5ERduT3rDp7UivkX6InJE4IYAPXKrnK5znOcu9VXNVPACoAAuD1qq1yOa5zXJuVF2oTuGaU3KitZa+0w7u8vfTwXiQIILQw7EK2IwdrVk1kT4kXe3xQ2yq6VyxRsNnqyKyRPoqclTihYWCYvDitbXbkyZn3kefw9U6EVJAAAAAAAAAAAAAMF21FSqyWJlyZG3NevJPmVpiV6bEbklmx8TlyRODU5IdBpvfWSaKhG7uM78mXFy7s/BPNDlgAALEoACgAAAAAGzht6bDrcdmuveauSpwcnJTWBKsWpStRXasdiBc2SNzT1T5Gc43Qi+sc0tCR3df348+Cpv+qeSnZEAAAAAAAAA8cqIiq7YiJmq9OJ6aOOSrDg92RuxexciLyz2eoFcXbLrlyay5dsr1dt4JwMI8AWJQAFAAAAAAAAAAEpGelYdTuQ2W74no7JOKcS02qjmo5u1q7UXpwKlLNwOVZsHpSO2qsLUX5bPQK3gAQAAAAAAitKVywC3l+VPNDwAV0ACxAAFAAAAAAAAAAACxtFlzwCpn+VfNTwEpEsACNAACP/Z"
-                        alt="User Avatar" class="avatar">
-                    <p class="username">Hardik Makkar</p>
-                    <p class="email">hardikmakkar27</p>
-                </div>
+            <div class="dashboard" >
+                <button style="background-color: #E5E5EA ;padding: 0%;" (click)="OpenModal()">
+                    <div class="user-info" style="display: flex; flex-direction: row-reverse; align-items: center;">
+                        <div class="pic" style="padding-top: 5%; padding-right: 5%; ">
+                            <img src="https://via.placeholder.com/50" alt="User Avatar" class="avatar" >
+                        </div>
+                        <div class="detail" style="overflow: hidden; margin-right: 2px; text-overflow: ellipsis;white-space: nowrap; width: 10vw; text-align: left;" >
+                            <p class="username" style="padding-bottom: 0%; margin-bottom: 0%; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; ">{{ patient.firstName }} {{ patient.lastName }}</p>
+                            <p class="email" style="color: gray; size: 1rem; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; margin-top: 0%; padding-top: 0%;">hardikmakkar27&#64;gmail.com</p>
+                        </div>                    
+                       
+                    </div>
+                </button>
                 <div class="dashboard-links">
                     <ul>
                         <!-- Use click event binding and class binding correctly -->
-                        <li><a href="#" routerLink="/doctor/clinic">My Clinic</a></li>
-                        <li><a href="#" routerLink="/doctor/exercises-list">Exercises</a></li>
-                        <li><a href="#" routerLink="/doctor/caliberate">Calibrate</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="#" routerLink="/doctor/clinic" style="color: black; display: block;" (click)="onLight('myClinic')" [ngClass]="{'backGround':myClinic}">
+                            <span><i class="fa fa-user-md" aria-hidden="true" ></i></span>&nbsp;&nbsp;My Clinic</a></li>
+                        <li><a href="#" routerLink="/doctor/exercises-list" style="color: black; display: block;" (click)="onLight('Exercises')" [ngClass]="{'backGround':Exercises}">
+                            <span><i class="fa fa-tasks" aria-hidden="true" ></i></span>&nbsp;&nbsp;Exercises</a></li>
+                        <li><a href="#" routerLink="/doctor/caliberate" style="color: black; display: block;">
+                            <span><i class="fa fa-cogs" aria-hidden="true" ></i></span>&nbsp;Caliberate</a></li>
+                        <li><a href="#" style="color: black; display: block;" (click)="onLight('Logout')" [ngClass]="{'backGround':Logout}">
+                            <span><i class="fa fa-sign-out" aria-hidden="true"></i></span>&nbsp;&nbsp;Logout</a></li>
                     </ul>
                 </div>
             </div>

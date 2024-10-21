@@ -24,34 +24,46 @@
   <div class="contact-section" style="background-color: #e1f7d5; padding: 20px; border-radius: 8px;">
       <h2 style="text-align: center;">Contact Us</h2>
       <p style="text-align: center;">Feel free to contact us to know more about</p>
-      <form style="margin-left: 100px; margin-right: 100px;">
+      <form style="margin-left: 100px; margin-right: 100px;" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
           <div class="form-group" style="margin-bottom: 15px;">
               <label for="role">I am a&nbsp;&nbsp;</label>
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="entry.1470796898" id="neu_role1" value="Doctor">
+                  <input class="form-check-input" type="radio"  id="neu_role1" formControlName="role" value="Doctor">
                   <label class="form-check-label" for="neu_role1">Doctor</label>
               </div>
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="entry.1470796898" id="neu_role2" value="Patient">
+                  <input class="form-check-input" type="radio"  id="neu_role2" formControlName="role" value="Patient">
                   <label class="form-check-label" for="neu_role2">Patient</label>
               </div>
-              <div><span class="error-msg" style="display: none;">Please choose your personality.</span></div>
+              <span class="error-msg" *ngIf="contactForm.get('role')?.invalid && contactForm.get('role')?.touched" style="color: red;">
+                Please choose your role.
+            </span>
           </div>
           <div class="mb-3">
               <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" style="border: 1px solid #ccc; border-radius: 4px;">
+              <input type="text" class="form-control" id="name" formControlName="name" style="border: 1px solid #ccc; border-radius: 4px;">
+              <span class="error-msg" *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched" style="color: red;">
+                Name is required.
+            </span>
           </div>
+          
           <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" style="border: 1px solid #ccc; border-radius: 4px;">
+              <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" style="border: 1px solid #ccc; border-radius: 4px;">
+              <span class="error-msg" *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" style="color: red;">
+                Please enter a valid email address.
+            </span>
           </div>
           <div class="mb-3">
               <label for="mobile" class="form-label">Mobile Number</label>
-              <input type="number" class="form-control" id="mobile" style="border: 1px solid #ccc; border-radius: 4px;">
+              <input type="number" class="form-control" id="mobile" formControlName="mobile" style="border: 1px solid #ccc; border-radius: 4px;">
+              <span class="error-msg" *ngIf="contactForm.get('mobile')?.invalid && contactForm.get('mobile')?.touched" style="color: red;">
+                Mobile number must be 10 digits.
+            </span>
           </div>
           <div class="mb-3">
               <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" style="border: 1px solid #ccc; border-radius: 4px;">
+              <input type="text" class="form-control" id="address" formControlName="address" style="border: 1px solid #ccc; border-radius: 4px;">
           </div>
           <div style="text-align: left;">
               <button type="submit" class="btn btn-success" style="background-color: #00aeef; color: #fff; margin-bottom: 50px;">Submit</button>

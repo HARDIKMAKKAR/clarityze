@@ -43,8 +43,14 @@ main {
   padding: 0;
 }
 
-.dashboard-links ul li {
+.dashboard-links li {
   margin-bottom: 10px;
+  /* padding: 10% 0%; */
+}
+
+.dashboard-links a {
+  margin-bottom: 10px;
+  padding: 10% 2%;
 }
 
 .dashboard-links ul li a {
@@ -73,8 +79,9 @@ main {
   color: #333333; /* Dark grey for text */
 }
 
-.dashboard-links ul li a:hover {
-  text-decoration: underline;
+.dashboard-links ul li a:hover  {
+  /* text-decoration: underline; */
+  background-color: lightgray;
   color: #0056b3; /* Darker blue on hover */
 }
 
@@ -196,6 +203,7 @@ footer {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
+  backdrop-filter: blur(10px);
   justify-content: center;
   align-items: center;
 }

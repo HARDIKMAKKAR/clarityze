@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl,FormGroup } from '@angular/forms';
+
+interface name{
+  title:string;
+  firstName:string;
+  lastName:string;
+}
 
 @Component({
   selector: 'app-doctor-landing-page',
@@ -7,6 +14,38 @@ import { Router } from '@angular/router';
   styleUrl: './doctor-landing-page.component.css'
 })
 export class DoctorLandingPageComponent {
+
+  patient:name={
+    title:'Mr',
+    firstName:'Hardik',
+    lastName:'Makkar',
+  }
+  Detail = new FormGroup({
+    title: new FormControl(this.patient.title),
+    Fname: new FormControl(this.patient.firstName),
+    Lname: new FormControl(this.patient.lastName),
+  });
+
+  isOpen: boolean=false;
+  // patientName:string='Hardik Makkar';
+  OpenModal(){
+    this.isOpen=true;
+
+  }
+  closeModal(){
+    this.isOpen=false;
+  }
+
+  onSubmit() {
+    // console.log(this.patient.firstName)
+    // console.log(this.Detail.value);
+    this.patient.title=this.Detail.value.title
+    this.patient.firstName=this.Detail.value.Fname
+    this.patient.lastName=this.Detail.value.Lname
+    this.closeModal()
+    // console.log(typeof(this.patient.firstName))
+  }
+
   assignMessage: any;
     constructor(private router: Router) {}
   
@@ -178,4 +217,38 @@ export class DoctorLandingPageComponent {
         this.currentSlide--;
       }
     }
+
+    myClinic=0;
+    Exercises=0;
+    Caliberate=0;
+    Logout=0
+    onWhite(){
+      this.myClinic=0;
+      this.Exercises=0;
+      this.Caliberate=0;
+      this.Logout=0;
+    }
+    onLight(cls:string){
+      this.onWhite();
+      this[cls]=1;
+      console.log(this[cls])
+    }
+
+    // lastNode: string | null = null;
+
+    // getLastNode(): void {
+    //   // Get the current URL
+    //   const currentUrl = this.router.url;
+  
+    //   // Split the URL into parts
+    //   const urlParts = currentUrl.split('/');
+  
+    //   // Access the last part
+    //   this.lastNode = urlParts[urlParts.length - 1] || null;
+  
+    //   console.log('Last node:', this.lastNode);
+    // }
+  
+
+    
 }
