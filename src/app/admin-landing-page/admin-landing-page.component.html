@@ -35,29 +35,65 @@
         <div class="modal-content">
             <span class="close" (click)="closeAddDoctorForm()">&times;</span>
             <h2>Add New Doctor</h2>
-            <form >
+            <form [formGroup]="addDoctorForm" (ngSubmit)="submitDoctorForm()" >
                 <label for="firstName">First Name:</label>
-                <input type="text" id="firstName"   name="firstName" required>
+                <input type="text" id="firstName" formControlName="firstName">
+                <span class="error-msg"
+style="color: red;" *ngIf="addDoctorForm.get('firstName')?.invalid && addDoctorForm.get('firstName')?.touched">
+                    First Name is required.
+                </span>
 
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName"  name="lastName" required>
+                <input type="text" id="lastName" formControlName="lastName">
+                <span class="error-msg"
+style="color: red;" *ngIf="addDoctorForm.get('lastName')?.invalid && addDoctorForm.get('lastName')?.touched">
+                    Last Name is required.
+                </span>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" formControlName="email">
+                <span class="error-msg"
+style="color: red;" *ngIf="addDoctorForm.get('email')?.invalid && addDoctorForm.get('email')?.touched">
+                    <span *ngIf="addDoctorForm.get('email')?.hasError('required')">Email is required.</span>
+                    <span *ngIf="addDoctorForm.get('email')?.hasError('email')">Please enter a valid email address.</span>
+                </span>
 
                 <label for="mobile">Mobile Number:</label>
-                <input type="tel" id="mobile" name="mobile" required>
+                <input type="tel" id="mobile" formControlName="mobile">
+                <span class="error-msg"
+style="color: red;" *ngIf="addDoctorForm.get('mobile')?.invalid && addDoctorForm.get('mobile')?.touched">
+                    <span *ngIf="addDoctorForm.get('mobile')?.hasError('required')">Mobile Number is required.</span>
+                    <span *ngIf="addDoctorForm.get('mobile')?.hasError('maxlength')">Mobile Number must be at most 10 digits.</span>
+                </span>
+    
 
                 <label for="language">Language:</label>
-                <select id="language"  name="language" required>
+                <select id="language" formControlName="language">
                     <option value="english">English</option>
                     <option value="spanish">Spanish</option>
                     <option value="french">French</option>
                     <option value="hindi">Hindi</option>
                 </select>
+                <span class="error-msg"
+style="color: red;" *ngIf="addDoctorForm.get('language')?.invalid && addDoctorForm.get('language')?.touched">
+                    Language is required.
+                </span>
 
                 <label for="message">Message:</label>
-                <textarea id="message" name="message"></textarea>
+                <textarea id="message" formControlName="message"></textarea>
+                <span class="error-msg"
+style="color: red;" *ngIf="addDoctorForm.get('message')?.invalid && addDoctorForm.get('message')?.touched">
+                    Message cannot exceed 2000 characters.
+                </span>
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" formControlName="age">
+                <span class="error-msg"
+style="color: red;" *ngIf="addDoctorForm.get('age')?.invalid && addDoctorForm.get('age')?.touched">
+                    <span *ngIf="addDoctorForm.get('age')?.hasError('required')">Age is required.</span>
+                    <span *ngIf="addDoctorForm.get('age')?.hasError('min')">Age must be at least 4.</span>
+                    <span *ngIf="addDoctorForm.get('age')?.hasError('max')">Age must be no more than 120.</span>
+                </span>
 
                 <button type="submit">Submit</button>
             </form>
@@ -73,24 +109,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Dr. John Smith</td>
-                                <td>john.smith.com</td>
-                                <td>45</td>
+                            <tr *ngFor="let doctor of doctors">
+                                <td> {{ doctor.firstName }} {{ doctor.lastName }} </td>
                                 <td>
-                                    <button class="edit-btn" (click)="openModal('edit', doctors)">✏️ Edit</button>
-                                    <button class="delete-btn" (click)="openModal('delete', doctors)">🗑️ Delete</button>
+                                    {{ doctor.email }}
+                                </td>
+                                <td>
+                                    {{ doctor.age }}
+                                </td>
+                                <td>
+                                    <button class="edit-btn" (click)="openModalDoctor('edit', doctor)">✏️</button>
+                                    <button class="delete-btn" (click)="openModalDoctor('delete', doctor)">🗑️</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Dr. Jane Doe</td>
-                                <td>jane.doecom</td>
-                                <td>38</td>
-                                <td>
-                                    <button class="edit-btn" (click)="openModal('edit', doctors)">✏️ Edit</button>
-                                    <button class="delete-btn" (click)="openModal('delete', doctors)">🗑️ Delete</button>
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -108,22 +140,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Emily Johnson</td>
-                                <td>emily.johnsoncom</td>
-                                <td>29</td>
+                            <tr *ngFor="let patient of patients">
+                                <td> {{ patient.name }} </td>
+                                <td> {{ patient.email }} </td>
+                                <td> {{ patient.age }} </td>
                                 <td>
-                                    <button class="edit-btn" (click)="openModal('edit', patients)">✏️ Edit</button>
-                                    <button class="delete-btn" (click)="openModal('delete', patients)">🗑️ Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Michael Brown</td>
-                                <td>michael.browcom</td>
-                                <td>34</td>
-                                <td>
-                                    <button class="edit-btn" (click)="openModal('edit', patients)">✏️ Edit</button>
-                                    <button class="delete-btn" (click)="openModal('delete', patients)">🗑️ Delete</button>
+                                    <button class="edit-btn" (click)="openModalPatient('edit', patient)">✏️</button>
+                                    <button class="delete-btn" (click)="openModalPatient('delete', patient)">🗑️</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -135,19 +158,65 @@
     </main>
 
     <!-- Edit Modal -->
-    <div class="modal" *ngIf="isModalOpen && modalType === 'edit'">
+    <div class="modal" *ngIf="isDoctorModalOpen && modalType === 'edit'">
         <div class="modal-content">
-            <span class="close" (click)="closeModal()">&times;</span>
-            <h2>Edit {{selectedItem.name}}</h2>
-            <form (ngSubmit)="submitEdit()">
+            <span class="close" (click)="closeModalDoctor()">&times;</span>
+            <h2>Edit {{selectedDoctor.name}}</h2>
+            <form [formGroup]="doctorEditForm" (ngSubmit)="submitEditDoctor()">
                 <label for="name">Name:</label>
-                <input type="text" id="name" [(ngModel)]="selectedItem.name" name="name">
+                <input type="text" id="name" formControlName="name">
+                <span class="error-msg"
+style="color: red;" *ngIf="doctorEditForm.get('name')?.invalid && doctorEditForm.get('name')?.touched">
+                    Name is required.
+                </span>
                 
                 <label for="email">Email:</label>
-                <input type="email" id="email" [(ngModel)]="selectedItem.email" name="email">
+                <input type="email" id="email" formControlName="email">
+                <span class="error-msg"
+style="color: red;" *ngIf="doctorEditForm.get('email')?.invalid && doctorEditForm.get('email')?.touched">
+                    Email is required.
+                </span>
                 
                 <label for="age">Age:</label>
-                <input type="number" id="age" [(ngModel)]="selectedItem.age" name="age">
+                <input type="number" id="age" formControlName="age">
+                <span class="error-msg"
+style="color: red;" *ngIf="doctorEditForm.get('age')?.invalid && doctorEditForm.get('age')?.touched">
+                    Age is required.
+                </span>
+                
+                <button type="submit">Save Changes</button>
+            </form>
+            
+        </div>
+    </div>
+
+
+    <!-- edit for patient -->
+    <div class="modal" *ngIf="isPatientModalOpen && modalType === 'edit'">
+        <div class="modal-content">
+            <span class="close" (click)="closeModalPatient()">&times;</span>
+            <h2>Edit {{selectedPatient.name}}</h2>
+            <form [formGroup]="patientEditForm" (ngSubmit)="submitEditPatient()">
+                <label for="name">Name:</label>
+                <input type="text" id="name" formControlName="name">
+                <span class="error-msg"
+style="color: red;" *ngIf="patientEditForm.get('name')?.invalid && patientEditForm.get('name')?.touched">
+                    Name is required.
+                </span>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" formControlName="email">
+                <span class="error-msg"
+style="color: red;" *ngIf="patientEditForm.get('email')?.invalid && patientEditForm.get('email')?.touched">
+                    Email is required.
+                </span>
+                
+                <label for="age">Age:</label>
+                <input type="number" id="age" formControlName="age">
+                <span class="error-msg"
+style="color: red;" *ngIf="patientEditForm.get('age')?.invalid && patientEditForm.get('age')?.touched">
+                    Age is required.
+                </span>
                 
                 <button type="submit">Save Changes</button>
             </form>
