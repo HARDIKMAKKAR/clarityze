@@ -45,12 +45,7 @@ export class PatientLandingPageComponent  implements OnInit{
   }
   closeModal(){
     this.isOpen=false;
-  }
-  
-
- 
-
-  
+  }  
   onSubmit() {
     // console.log(this.patient.firstName)
     // console.log(this.Detail.value);
