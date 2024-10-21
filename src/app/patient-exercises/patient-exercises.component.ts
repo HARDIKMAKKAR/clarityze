@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { DoctorService } from '../shared/doctorService.service';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HostListener } from '@angular/core';
 interface Opt{
   label:string;
   detail:string;
@@ -12,23 +16,17 @@ interface Opt{
 export class PatientExercisesComponent implements OnInit {
 
 
+  exerciseForm: FormGroup
   isFormVisible: boolean = false;
   inputValue: string = '';
-
+  showAddExerciseForm = false;
   formStatus(){
     this.isFormVisible= !this.isFormVisible
   }
 
   isModalOpen: boolean = false;
-  constructor(){
 
-  }
-
-  
-
-  // Sample data for dropdowns
-  // options1 = ['Level 1', 'Level 2', 'Level 3'];
-  options1 :Opt[]=[
+  options1 : Opt[]=[
     {label:'Level 1', detail:'Sample Detail'},
     {label:'Level 2', detail:'Sample Detail'},
     {label:'Level 3', detail:'Sample Detail'},
@@ -47,6 +45,34 @@ export class PatientExercisesComponent implements OnInit {
   options2Visible: boolean = false;
   options3Visible: boolean = false;
   options4Visible: boolean = false;
+
+  constructor(){
+    this.exerciseForm=new FormGroup({
+      'levelSelected': new FormControl('Level 1'),
+      'AnaglyphSelected': new FormControl('None'),
+      'colorSelected':new FormControl('Black'),
+      'durationSelected': new FormControl('02:00'),
+      'bouncesSelected':new FormControl('0'),
+      advOptions: new FormGroup({
+        'dropdownSelected': new FormControl('Black'),
+      })
+    })
+    console.log(this.exerciseForm)
+  }
+  ngOnInit(){
+    
+    console.log('event complete')
+  }
+  
+  closeAddExerciseForm(){
+    this.showAddExerciseForm = false;
+  }
+  openAddExerciseForm(){
+    this.showAddExerciseForm = true;
+  }
+  // Sample data for dropdowns
+  // options1 = ['Level 1', 'Level 2', 'Level 3'];
+  
 
   // Method to open the modal
   openModal(): void {
@@ -72,14 +98,29 @@ export class PatientExercisesComponent implements OnInit {
     this.options4Visible = false;
   }
 
-  selectOption(option: string, dropdown: string): void {
+  selectOption(option: string, dropdown: string,controlName:string) {
+  
+    // console.log(`Selected option: ${option}`)
+    this.exerciseForm.get(controlName)?.setValue(option);
     this[dropdown] = option;
+    
     this.hideOptions(); // Hide options after selection
+    
+  }
+
+   @HostListener('document:click', ['$event'])
+   onClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.dropdown')) {
+      this.hideOptions(); // Hide options if click is outside
+    }
   }
 
   // Method to handle form submission (add your logic here)
-  onSubmit(formValues: any): void {
-    console.log('Form Submitted:', formValues);
+  onSubmit(): void {
+    console.log(this.exerciseForm.value)
+    // console.log('Form Submitted:', formValues);
+    // console.log(this.exerciseForm.value.level)
     this.closeModal(); // Close the modal after submission
   }
   nestedVisible : boolean=false;
@@ -90,7 +131,8 @@ export class PatientExercisesComponent implements OnInit {
   showAdvOption(){
     this.advVisible=true;
   }
-  ngOnInit(){
-
-  }
+  
+  // onClick(){
+  //   console.log('hello clicked')
+  // }
 }

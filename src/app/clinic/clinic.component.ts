@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { formatCurrency } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,9 +8,43 @@ import { Router } from '@angular/router';
   templateUrl: './clinic.component.html',
   styleUrl: './clinic.component.css'
 })
-export class ClinicComponent {
+export class ClinicComponent implements OnInit {
   assignMessage: any;
   constructor(private router: Router) {}
+
+  ngOnInit() {
+
+    this.editPatientForm = new FormGroup({
+      firstName:new FormControl('',Validators.required),
+      lastName:new FormControl('',Validators.required),
+      age: new FormControl('',[Validators.required,Validators.min(5), Validators.max(120)]),
+      email: new FormControl('',[Validators.required, Validators.email]),
+    })
+    this.assignExerciseForm=new FormGroup({
+      exercise: new FormControl('',Validators.required),
+      message: new FormControl('',Validators.maxLength(1000)),
+      timeout: new FormControl('',Validators.max(40)),
+      glasstype: new FormControl('',Validators.required)
+    })
+    this.addPatientForm=new FormGroup({
+      firstName: new FormControl('',Validators.required),
+      lastName: new FormControl('',Validators.required),
+      email: new FormControl('',[Validators.required,Validators.email]),
+      mobile: new FormControl('',[Validators.required,Validators.maxLength(10)]),
+      language: new FormControl('',Validators.required),
+      message:new FormControl('',Validators.maxLength(2000)),
+      age: new FormControl('',[Validators.required,Validators.min(4),Validators.max(120)]),
+    })
+     
+    console.log(this.addPatientForm)
+    console.log(this.assignExerciseForm)
+     console.log(this.editPatientForm),
+    console.log('hello')
+  }
+
+  editPatientForm:FormGroup;
+  assignExerciseForm:FormGroup;
+  addPatientForm:FormGroup;
 
   showAddPatientForm = false;
   showEditPatientForm = false;
@@ -28,7 +64,7 @@ export class ClinicComponent {
     mobile: '',
     language: '',
     message: '',
-    age: 0  // Added 'age' field for patient management
+    age: 2 , // Added 'age' field for patient management
   };
 
   // Existing patients array for displaying in table format
@@ -73,6 +109,12 @@ export class ClinicComponent {
   }
 
   submitPatientForm() {
+    console.log(this.addPatientForm.value)
+    
+    this.newPatient = {
+      ...this.newPatient, // Retain existing properties
+      ...this.addPatientForm.value // Spread the form values into the object
+    };
     console.log('New Patient:', this.newPatient);
     this.patients.push({ ...this.newPatient }); // Add the new patient to the list
 
@@ -92,6 +134,7 @@ export class ClinicComponent {
 
   openEditPatientForm(patient: any) {
     this.selectedPatient = { ...patient }; // Set selected patient for editing
+    this.editPatientForm.patchValue(patient)
     this.showEditPatientForm = true;
   }
 
@@ -99,20 +142,31 @@ export class ClinicComponent {
     this.showEditPatientForm = false;
   }
 
+  
+
+  
+
   submitEditPatientForm() {
     // Update the patient details in the list
+    if (this.editPatientForm.valid) {
     const index = this.patients.findIndex(p => p.email === this.selectedPatient.email);
     if (index !== -1) {
-      this.patients[index] = { ...this.selectedPatient };
+      this.patients[index] = this.editPatientForm.value;
+      // this.patients[index] = { ...this.selectedPatient };
     }
 
-    console.log('Updated Patient:', this.selectedPatient);
+    console.log('Updated Patient:', this.editPatientForm.value);  // SUBMIT EDITTED PATIENT VALUE : FORM UPDATED
     this.closeEditPatientForm();
+  }
+  else{
+    alert('Invalid creditionals')
+  }
   }
 
   openAssignExerciseForm(patient: any) {
     this.selectedPatient = patient; // Set the selected patient for assigning exercise
     this.showAssignExerciseForm = true;
+    // this.assignExerciseForm.patchValue(patient)
     this.timeout = 0; 
     this.glassType = '';
   }
@@ -121,9 +175,20 @@ export class ClinicComponent {
     this.showAssignExerciseForm = false;
   }
 
+  // onClicked(exercise:string){
+  //   this.assignExerciseForm.get(exercise)?.setValue(exercise)
+  //   console.log('option clicked');
+  // }
+
   assignExerciseToPatient() {
-    console.log(`Assigned Exercise: ${this.selectedExercise.name} to Patient: ${this.selectedPatient.firstName}`);
+    // console.log(`Assigned Exercise: ${this.selectedExercise.name} to Patient: ${this.selectedPatient.firstName}`);
+    if(this.assignExerciseForm.valid){
+    console.log(this.assignExerciseForm.value)
     this.closeAssignExerciseForm();
+    }
+    else{
+      alert('Invalid creditionals')
+    }
   }
 
   openAddExerciseForm() {

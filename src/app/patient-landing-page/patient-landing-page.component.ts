@@ -57,8 +57,26 @@ export class PatientLandingPageComponent  implements OnInit{
     this.patient.title=this.Detail.value.title
     this.patient.firstName=this.Detail.value.Fname
     this.patient.lastName=this.Detail.value.Lname
+    console.log(this.Detail.value)
     this.closeModal()
     // console.log(typeof(this.patient.firstName))
   }
   activeSection = 'patient-exercises'
+
+  myClinic=0;
+  Exercises=0;
+  Caliberate=0;
+  Logout=0
+  onWhite(){
+    this.myClinic=0;
+    this.Exercises=0;
+    this.Caliberate=0;
+    this.Logout=0;
+  }
+  onLight(cls:string){
+    this.onWhite();
+    this[cls]=1;
+    console.log(this[cls])
+  }
+
 }

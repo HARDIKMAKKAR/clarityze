@@ -4,16 +4,16 @@
         <h2>Clarityze</h2>
     </header>
     <main>
-        <div class="left-panel">
+        <div class="left-panel" style="padding-right: 0%;">
             <!-- Personal Dashboard Section -->
             <div class="dashboard">
                 <button style="background-color: #E5E5EA ;padding: 0%;" (click)="OpenModal()">
                     <div class="user-info" style="display: flex; flex-direction: row-reverse; align-items: center;">
-                        <div class="pic" style="padding-top: 5%;">
+                        <div class="pic" style="padding-top: 5%; padding-right: 5%;">
                             <img src="https://via.placeholder.com/50" alt="User Avatar" class="avatar">
                         </div>
-                        <div class="detail" style="overflow: hidden; margin-right: 2px; text-overflow: ellipsis;white-space: nowrap; width: 10vw;" >
-                            <p class="username" style="padding-bottom: 0%; margin-bottom: 0%;">{{ patient.title }} {{ patient.firstName }} {{ patient.lastName }}</p>
+                        <div class="detail" style="overflow: hidden; margin-right: 2px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; width: 10vw; text-align: left;" >
+                            <p class="username" style="padding-bottom: 0%; margin-bottom: 0%; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{ patient.firstName }} {{ patient.lastName }}</p>
                             <p class="email" style="color: gray; size: 1rem; overflow: hidden;text-overflow: ellipsis;white-space: nowrap; margin-top: 0%; padding-top: 0%;">hardikmakkar27&#64;gmail.com</p>
                         </div>                    
                        
@@ -23,11 +23,11 @@
                     <!-- <div class="link1"><a routerLink="/patient/patient-exercises" style="color: black;" ><span><i class="fa fa-tasks" aria-hidden="true" ></i></span>&nbsp;&nbsp;Exercises</a></div> -->
                     <ul>
                         <!-- Use click event binding and class binding correctly -->
-                        <li><a routerLink="/patient/patient-exercises" style="color: black; display: block;"><span><i
+                        <li style="display: block;"><a routerLink="/patient/patient-exercises" style="color: black; display: block;" (click)="onLight('Exercises')" [ngClass]="{'backGround':Exercises}"><span><i
                                         class="fa fa-tasks" aria-hidden="true"></i></span>&nbsp;&nbsp;Exercises</a></li>
-                        <li><a routerLink="/patient/caliberate" style="color: black; display: block;"><span><i
+                        <li><a routerLink="/patient/caliberate" style="color: black; display: block;" ><span><i
                                         class="fa fa-cogs" aria-hidden="true"></i></span>&nbsp;Calibrate</a></li>
-                        <li><a href="#" style="color: black; display: block;"><span><i class="fa fa-sign-out"
+                        <li><a href="#" style="color: black; display: block;" (click)="onLight('Logout')" [ngClass]="{'backGround':Logout}"><span><i class="fa fa-sign-out"
                                         aria-hidden="true"></i></span>&nbsp;&nbsp;Logout</a></li>
                     </ul>
                 </div>
@@ -35,9 +35,42 @@
         </div>
         <div class="body-content" style="padding: 0%; margin: 0%;">
             <!-- Conditional Rendering for Clinic Section -->
-            <router-outlet></router-outlet>
+            <router-outlet ></router-outlet>
         </div>
     </main>
+
+    <div class="modal" *ngIf="isOpen">
+        <div class="modal-content">
+            <div class="head">
+                <div class="email" style="font-size: large; "><strong>hardikmakkar27&#64;gmail</strong></div>
+                <div class="close" (click)="closeModal()">&times;</div>
+    
+            </div>
+            
+            <form [formGroup]="Detail">
+                <div class="inputs">
+                <div class="title">
+                    <label for="title" style="color: gray; ">Title</label>
+                    <input  id="title" type="text" formControlName="title" placeholder="{{ patient.title }}" >
+                </div>
+                <div class="firstName">
+                    <label for="First Name">First Name</label>
+                    <input id="Fname" type="text" formControlName="Fname">
+                </div>
+                <div class="lastName">
+                    <label for="Last Name">
+                        Last Name
+                    </label>
+                    <input id="Lname" type="text" formControlName="Lname">
+                </div>
+            </div>
+                <button type="submit" class="btn btn-primary" (click)="onSubmit()" >Submit</button>
+                
+            </form>
+            
+        </div>
+    </div>
+
     <!-- Footer Section -->
     <footer>
         <p>© 2024 Company Name. All rights reserved.</p>

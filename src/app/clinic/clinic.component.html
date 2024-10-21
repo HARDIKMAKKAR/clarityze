@@ -14,31 +14,69 @@
         <div class="modal-content">
             <span class="close" (click)="closeAddPatientForm()">&times;</span>
             <h2>Add New Patient</h2>
-            <form (ngSubmit)="submitPatientForm()">
+            <form [formGroup]="addPatientForm" (ngSubmit)="submitPatientForm()">
                 <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" [(ngModel)]="newPatient.firstName"  name="firstName" required>
+                <input type="text" id="firstName" formControlName="firstName">
+                <span class="error-msg"
+style="color: red;" *ngIf="addPatientForm.get('firstName')?.invalid && addPatientForm.get('firstName')?.touched">
+                    First Name is required.
+                </span>
 
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" [(ngModel)]="newPatient.lastName" name="lastName" required>
+                <input type="text" id="lastName" formControlName="lastName">
+                <span class="error-msg"
+style="color: red;" *ngIf="addPatientForm.get('lastName')?.invalid && addPatientForm.get('lastName')?.touched">
+                    Last Name is required.
+                </span>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" [(ngModel)]="newPatient.email" name="email" required>
+                <input type="email" id="email" formControlName="email">
+                <span class="error-msg"
+style="color: red;" *ngIf="addPatientForm.get('email')?.invalid && addPatientForm.get('email')?.touched">
+                    <span *ngIf="addPatientForm.get('email')?.hasError('required')">Email is required.</span>
+                    <span *ngIf="addPatientForm.get('email')?.hasError('email')">Please enter a valid email address.</span>
+                </span>
 
                 <label for="mobile">Mobile Number:</label>
-                <input type="tel" id="mobile" [(ngModel)]="newPatient.mobile" name="mobile" required>
+                <input type="tel" id="mobile" formControlName="mobile">
+                <span class="error-msg"
+style="color: red;" *ngIf="addPatientForm.get('mobile')?.invalid && addPatientForm.get('mobile')?.touched">
+                    <span *ngIf="addPatientForm.get('mobile')?.hasError('required')">Mobile Number is required.</span>
+                    <span *ngIf="addPatientForm.get('mobile')?.hasError('maxlength')">Mobile Number must be at most 10 digits.</span>
+                </span>
+    
 
                 <label for="language">Language:</label>
-                <select id="language" [(ngModel)]="newPatient.language" name="language" required>
+                <select id="language" formControlName="language">
                     <option value="english">English</option>
                     <option value="spanish">Spanish</option>
                     <option value="french">French</option>
                     <option value="hindi">Hindi</option>
                 </select>
+                <span class="error-msg"
+style="color: red;" *ngIf="addPatientForm.get('language')?.invalid && addPatientForm.get('language')?.touched">
+                    Language is required.
+                </span>
 
                 <label for="message">Message:</label>
-                <textarea id="message" [(ngModel)]="newPatient.message" name="message"></textarea>
+                <textarea id="message" formControlName="message"></textarea>
+                <span class="error-msg"
+style="color: red;" *ngIf="addPatientForm.get('message')?.invalid && addPatientForm.get('message')?.touched">
+                    Message cannot exceed 2000 characters.
+                </span>
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" formControlName="age">
+                <span class="error-msg"
+style="color: red;" *ngIf="addPatientForm.get('age')?.invalid && addPatientForm.get('age')?.touched">
+                    <span *ngIf="addPatientForm.get('age')?.hasError('required')">Age is required.</span>
+                    <span *ngIf="addPatientForm.get('age')?.hasError('min')">Age must be at least 4.</span>
+                    <span *ngIf="addPatientForm.get('age')?.hasError('max')">Age must be no more than 120.</span>
+                </span>
+    
 
                 <button type="submit">Submit</button>
+
             </form>
         </div>
     </div>
@@ -61,8 +99,11 @@
                     <td>{{ patient.age }}</td>
                     <td>{{ patient.email }}</td>
                     <td>
-                        <button (click)="openEditPatientForm(patient)">Edit</button>
-                        <button (click)="openAssignExerciseForm(patient)">Assign Exercise</button>
+                        <div class="edits" style="display: flex; justify-content: space-evenly;">
+                        <button (click)="openEditPatientForm(patient)"><i class="fas fa-edit"></i></button>
+                        <button (click)="openAssignExerciseForm(patient)"><i class="fa fa-list-ul" aria-hidden="true"></i></button>
+                        <button ><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -74,18 +115,39 @@
         <div class="modal-content">
             <span class="close" (click)="closeEditPatientForm()">&times;</span>
             <h2>Edit Patient</h2>
-            <form (ngSubmit)="submitEditPatientForm()">
+            <form [formGroup]="editPatientForm" (ngSubmit)="submitEditPatientForm()">
                 <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" [(ngModel)]="selectedPatient.firstName" name="firstName" required>
+                <input type="text" id="firstName" formControlName="firstName">
+                <span class="error-msg"
+style="color: red;" *ngIf="editPatientForm.get('firstName')?.invalid && editPatientForm.get('firstName')?.touched">
+                    <span *ngIf="editPatientForm.get('firstName')?.hasError('required')">First Name is required.</span>
+                </span>
 
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" [(ngModel)]="selectedPatient.lastName" name="lastName" required>
+                <input type="text" id="lastName" formControlName="lastName">
+                <span class="error-msg"
+style="color: red;" *ngIf="editPatientForm.get('lastName')?.invalid && editPatientForm.get('lastName')?.touched">
+                    <span *ngIf="editPatientForm.get('lastName')?.hasError('required')">Last Name is required.</span>
+                </span>
+        
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" [(ngModel)]="selectedPatient.email" name="email" required>
+                <input type="email" id="email" formControlName="email">
+                <span class="error-msg"
+style="color: red;" *ngIf="editPatientForm.get('email')?.invalid && editPatientForm.get('email')?.touched">
+                    <span *ngIf="editPatientForm.get('email')?.hasError('required')">Email is required.</span>
+                    <span *ngIf="editPatientForm.get('email')?.hasError('email')">Enter a valid email address.</span>
+                </span>
 
                 <label for="age">Age:</label>
-                <input type="number" id="age" [(ngModel)]="selectedPatient.age" name="age" required>
+                <input type="number" id="age" formControlName="age">
+                <span class="error-msg"
+style="color: red;" *ngIf="editPatientForm.get('age')?.invalid && editPatientForm.get('age')?.touched">
+                    <span *ngIf="editPatientForm.get('age')?.hasError('required')">Age is required.</span>
+                    <span *ngIf="editPatientForm.get('age')?.hasError('min')">Age must be at least 0.</span>
+                    <span *ngIf="editPatientForm.get('age')?.hasError('max')">Age must be no more than 120.</span>
+                </span>
+        
 
                 <button type="submit">Save</button>
             </form>
@@ -97,20 +159,38 @@
         <div class="modal-content">
             <span class="close" (click)="closeAssignExerciseForm()">&times;</span>
             <h2>Assign Exercise</h2>
-            <form (ngSubmit)="assignExerciseToPatient()">
+            <form [formGroup]="assignExerciseForm" (ngSubmit)="assignExerciseToPatient()">
                 <label for="exercise">Select Exercise:</label>
-                <select id="exercise" [(ngModel)]="selectedExercise" name="exercise" required>
-                    <option *ngFor="let exercise of exercises" [value]="exercise">{{ exercise.name }}</option>
+                <select id="exercise" formControlName="exercise"  >
+                    <option value="">-- Select Exercise --</option>
+                    <option *ngFor="let exercise of exercises" [value]="exercise.name">{{ exercise.name }}</option>
                 </select>
+                <span class="error-msg"
+style="color: red;" *ngIf="assignExerciseForm.get('exercise')?.invalid && assignExerciseForm.get('exercise')?.touched">
+                    Exercise selection is required.
+                </span>
 
                 <label for="message">Message to Patient:</label>
-                <textarea id="message" [(ngModel)]="assignMessage" name="message"></textarea>
+                <textarea id="message" formControlName="message"></textarea>
+                <span class="error-msg"
+style="color: red;" *ngIf="assignExerciseForm.get('message')?.hasError('maxlength') && assignExerciseForm.get('message')?.touched">
+                    Message cannot exceed 1000 characters.
+                </span>
 
                 <label for="timeout">Timeout (in minutes):</label>
-<input type="number" id="timeout" [(ngModel)]="timeout" name="timeout" required min="1" placeholder="Enter timeout in minutes">
+                <input type="number" id="timeout" formControlName="timeout" placeholder="Enter timeout in minutes">
+                <span class="error-msg"
+style="color: red;" *ngIf="assignExerciseForm.get('timeout')?.hasError('max') && assignExerciseForm.get('timeout')?.touched">
+                    Timeout cannot exceed 40 minutes.
+                </span>
+
 
                 <label for="timeout">Anaglyph Glass Type</label>
-<input type="test" id="glassType" [(ngModel)]="glassType" name="glassType"  placeholder="Enter Anaglyph Glass Type">
+                <input type="test" id="glassType" formControlName="glasstype"  placeholder="Enter Anaglyph Glass Type">
+                <span class="error-msg"
+style="color: red;" *ngIf="assignExerciseForm.get('glasstype')?.invalid && assignExerciseForm.get('glasstype')?.touched">
+                    Anaglyph Glass Type is required.
+                </span>
 
                 <button type="submit">Assign</button>
             </form>

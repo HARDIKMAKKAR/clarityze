@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 interface caliberateData {
@@ -31,12 +32,22 @@ export class CaliberateComponent implements OnInit {
   }, {
     src: "https://neurovisualtrainer.com/assets/red-green.png"
   }];
+  // caliberateForm:FormGroup
   ngOnInit() {
+    // this.caliberateForm=new FormGroup({
+    //   scrnHeight: new FormControl(''),
+    //   wrkingDistance:new FormControl(''),
+    //   colorCalib: new FormGroup({
+    //     brightRed:new FormControl(''),
+    //     brightBlue: new FormControl(''),
+    //   })
+    // })
     this.router.url.subscribe(url => {
       console.log(url);
       this.Url = JSON.stringify(url[0].path);
     });
     if (localStorage.getItem("caliberateData") === null) {
+
       this.caliberation = {
         screenHeight: window.screen.availHeight.toString(), workingDistance: "10", colorCaliberation: {
           brightnessRed: "20",
@@ -149,5 +160,6 @@ export class CaliberateComponent implements OnInit {
   }
   selectImage(index: number) {
     this.selectedImageIndex = index;
+    console.log(this.selectedImageIndex)
   }
 }
