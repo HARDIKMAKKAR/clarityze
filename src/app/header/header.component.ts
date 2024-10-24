@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
   private checkScroll() {
     const scrollY = window.scrollY || document.documentElement.scrollTop;
     this.isOpaque = scrollY > 0;
-    console.log('Scroll Y:', scrollY, 'Is Opaque:', this.isOpaque);
+    // console.log('Scroll Y:', scrollY, 'Is Opaque:', this.isOpaque);
 
   }
   currentstatus = false;

@@ -162,4 +162,24 @@ export class CaliberateComponent implements OnInit {
     this.selectedImageIndex = index;
     console.log(this.selectedImageIndex)
   }
+
+  fisrtSlide=0;
+  SecondSlide=0;
+  thirdSlide=0;
+  fourthSlide=0;
+  ontagClick(num:string){
+    this[num+'Slide']=1;
+    if(num==='first'){
+      this.currentSlide=0;
+    }
+    else if(num==='second'){
+      this.currentSlide=1;
+    }
+    else if(num==='third'){
+      this.currentSlide=2;
+    }
+    else if(num==='fourth'){
+      this.currentSlide=3;
+    }
+  }
 }

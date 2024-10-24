@@ -4,7 +4,8 @@
     
 }
 .transparent-header{
-    background-color: rgba(43,122,75,0.5);
+    background-color: rgba(43,122,75,0.7);
+    backdrop-filter: blur(10px);
 }
 .container-fluid{
     transition: background-color 0.3s ease;

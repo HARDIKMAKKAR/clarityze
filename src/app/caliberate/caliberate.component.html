@@ -4,23 +4,23 @@
         <div class="modal1-content">
             <span class="close" (click)="closeCalibrateModal()" >&times;</span>
             <div class="roadmap">
-                <div class="roadmap-slide" [ngClass]="[this.currentSlide<4?'Active':'notActive']">
+                <div class="roadmap-slide" [ngClass]="[this.currentSlide<4?'Active':'notActive']" (click)="ontagClick('first')">
 
                     <div *ngIf="currentSlide>0"  style="margin-right: 5%;"><i class="fa fa-check-circle " aria-hidden="true"></i></div>
                     <div *ngIf="currentSlide===0" style="margin-right: 5%;"><div class="number-icon ">1</div></div><h6 style="margin-bottom: 0%;">Screen Height</h6>
                 </div>
                 <div class="line"></div>
-                <div class="roadmap-slide" [ngClass]="[this.currentSlide<4?'Active':'notActive',this.currentSlide>0?'Active':'notActive']" >
+                <div class="roadmap-slide" [ngClass]="[this.currentSlide<4?'Active':'notActive',this.currentSlide>0?'Active':'notActive']" (click)="ontagClick('second')" >
                     <div *ngIf="currentSlide>1" style="margin-right: 5%;"><i class="fa fa-check-circle" aria-hidden="true"></i></div>
                     <div *ngIf="currentSlide<2" style="margin-right: 5%;"><div class="number-icon">2</div></div><h6 style="margin-bottom: 0%;">Working Distance</h6>
                 </div>
                 <div class="line"></div>
-                <div class="roadmap-slide" [ngClass]="[this.currentSlide<4?'Active':'notActive',this.currentSlide>1?'Active':'notActive']">
+                <div class="roadmap-slide" [ngClass]="[this.currentSlide<4?'Active':'notActive',this.currentSlide>1?'Active':'notActive']" (click)="ontagClick('third')">
                     <div *ngIf="currentSlide>2" style="margin-right: 5%;"><i class="fa fa-check-circle" aria-hidden="true"></i></div>
                     <div *ngIf="currentSlide<3" style="margin-right: 5%;"><div class="number-icon">3</div></div><h6 style="margin-bottom: 0%;">Anaglyph Glasses</h6>
                 </div>
                 <div class="line"></div>
-                <div class="roadmap-slide" [ngClass]="[this.currentSlide===3?'Active':'notActive']">
+                <div class="roadmap-slide" [ngClass]="[this.currentSlide===3?'Active':'notActive']" (click)="ontagClick('fourth')">
                     <div *ngIf="currentSlide>4" style="margin-right: 5%;"><i class="fa fa-check-circle" aria-hidden="true"></i></div>
                     <div *ngIf="currentSlide<4" style="margin-right: 5%;"><div class="number-icon">4</div></div><h6 style="margin-bottom: 0%;">Colour Caliberation</h6>
                 </div>
